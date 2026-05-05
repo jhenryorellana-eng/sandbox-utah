@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:utahinnovationoffice.org)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\mauri\\\\Documents\\\\Trabajos\\\\UsaLatinoPrime\" -Recurse -Directory -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)"
+    ]
+  }
+}

@@ -1,0 +1,337 @@
+{
+  "Meta": {
+    "title": "USA Latino Prime Utah",
+    "titleTemplate": "%s | USA Latino Prime Utah",
+    "description": "Bilingual legal platform for Utah residents — Utah Legal Sandbox Phase 2"
+  },
+  "Nav": {
+    "home": "Home",
+    "login": "Sign in",
+    "register": "Sign up",
+    "dashboard": "My cases",
+    "logout": "Sign out",
+    "language": "Language",
+    "spanish": "Español",
+    "english": "English"
+  },
+  "Landing": {
+    "headline": "Utah legal paperwork, in your language",
+    "subhead": "Fill out forms for uncontested divorce, custody, housing, or business formation with step-by-step guidance. We do NOT handle immigration.",
+    "ctaPrimary": "Create free account",
+    "ctaSecondary": "I already have an account",
+    "trustBadge": "Operating under Utah Legal Regulatory Sandbox Phase 2"
+  },
+  "Auth": {
+    "signUpTitle": "Create account",
+    "signUpSubtitle": "Sign up to start your filing",
+    "signInTitle": "Sign in",
+    "signInSubtitle": "Pick up where you left off",
+    "verifyTitle": "Verify your email",
+    "verifyBody": "We sent a confirmation link to {email}. Check your inbox (and spam folder) and click the link to activate your account.",
+    "fields": {
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "Minimum 8 characters",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "As shown on your ID"
+    },
+    "actions": {
+      "signUp": "Sign up",
+      "signIn": "Sign in",
+      "signOut": "Sign out",
+      "submitting": "Processing..."
+    },
+    "links": {
+      "haveAccount": "Already have an account? Sign in",
+      "noAccount": "No account? Sign up",
+      "forgotPassword": "Forgot password?"
+    },
+    "errors": {
+      "invalidCredentials": "Incorrect email or password.",
+      "emailTaken": "An account already exists with this email.",
+      "weakPassword": "Password must be at least 8 characters.",
+      "invalidEmail": "Invalid email.",
+      "rateLimited": "Too many attempts. Wait a few minutes and try again.",
+      "generic": "Something went wrong. Try again or contact us."
+    }
+  },
+  "Dashboard": {
+    "welcome": "Hello, {name}",
+    "emptyState": "You have no active cases yet.",
+    "createFirstCase": "Create first case (coming soon)"
+  },
+  "Disclaimers": {
+    "complaintBanner": "This entity operates under the Utah Legal Regulatory Sandbox. If you have a complaint or feedback, contact us at support@usalatinoprime.com or report directly to the Utah Office of Legal Services Innovation: https://utahinnovationoffice.org/sandbox-customer-complaint/",
+    "complaintBannerShort": "Report complaints: utahinnovationoffice.org/sandbox-customer-complaint/",
+    "notALawFirm": "This is not a law firm. Some of the people who own or manage this company are not lawyers. This means that some services or protections, like the attorney-client privilege, may be different from those you could get from a law firm.",
+    "notALawFirmShort": "We are not a law firm. We do not provide legal advice."
+  },
+  "Consents": {
+    "intro": "Before continuing, we need you to confirm the following. Check each box only if you understand and agree.",
+    "items": {
+      "is_utah_resident": {
+        "version": "v1.0-2026-05-02",
+        "text": "I confirm that I am a resident of the state of Utah and 18 years of age or older."
+      },
+      "not_a_law_firm": {
+        "version": "v1.0-2026-05-02",
+        "text": "I understand that this platform is NOT a law firm and that some people who manage it are not lawyers."
+      },
+      "no_legal_advice": {
+        "version": "v1.0-2026-05-02",
+        "text": "I understand that this platform will NOT provide me with legal advice. If I need advice, I must consult a Utah-licensed attorney."
+      },
+      "no_immigration": {
+        "version": "v1.0-2026-05-02",
+        "text": "I understand that this platform does NOT handle immigration matters (visas, green cards, USCIS, asylum, deportation, citizenship, etc.)."
+      },
+      "accuracy_responsibility": {
+        "version": "v1.0-2026-05-02",
+        "text": "I agree that I am responsible for reviewing and verifying the accuracy of all information I provide and of each generated document before submitting it."
+      },
+      "ai_usage": {
+        "version": "v1.0-2026-05-02",
+        "text": "I agree that the platform may use artificial intelligence (Google Gemini) to help organize the information I provide, knowing that I review and approve everything before continuing."
+      },
+      "complaint_rights": {
+        "version": "v1.0-2026-05-02",
+        "text": "I understand that I can submit complaints both to this platform and to the Utah Office of Legal Services Innovation at https://utahinnovationoffice.org/sandbox-customer-complaint/."
+      },
+      "tos_privacy": {
+        "version": "v1.0-2026-05-02",
+        "text": "I have read and accept the Terms of Service and the Privacy Policy (UCPA)."
+      }
+    },
+    "submit": "Accept all terms and continue",
+    "errorMustAcceptAll": "You must accept all terms to continue."
+  },
+  "Offline": {
+    "title": "You are offline",
+    "body": "We couldn't load this page. When the connection is back, you can continue where you left off. If you were filling out a form, your draft is saved locally.",
+    "retry": "Retry"
+  },
+  "Footer": {
+    "company": "USA Latino Prime LLC",
+    "address": "Salt Lake City, Utah",
+    "rights": "© {year} USA Latino Prime LLC. All rights reserved.",
+    "links": {
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "complaint": "Submit a complaint",
+      "services": "Services"
+    }
+  },
+  "Catalog": {
+    "pageTitle": "Available services",
+    "pageDescription": "Three areas: Family (uncontested), Housing (eviction defense) and Business (LLC, DBA, contracts). You choose the service to start — the platform does not recommend.",
+    "immigrationNotice": "Important: We do NOT offer immigration services. For immigration matters consult a licensed immigration attorney.",
+    "empty": "Catalog unavailable. Try again later.",
+    "whatIncludes": "What it includes",
+    "whatDoesNotInclude": "What it does NOT include",
+    "minutes": "estimated minutes",
+    "startCase": "Start this case",
+    "disclaimerInline": "This service does NOT include personalized legal advice. The platform helps you fill out the form with the information you provide. If you need advice, consult a Utah-licensed attorney.",
+    "categories": {
+      "family": "Family",
+      "housing": "Housing",
+      "business": "Business"
+    }
+  },
+  "Onboarding": {
+    "title": "Welcome to USA Latino Prime Utah",
+    "stepOf": "Step {step} of {total}",
+    "next": "Next",
+    "back": "Back",
+    "saveAndExit": "Save and exit",
+    "skip": "Skip for now",
+    "steps": {
+      "personal": {
+        "title": "Personal information",
+        "subtitle": "We need your basic data to create your profile.",
+        "fields": {
+          "fullName": "Full legal name",
+          "fullNameHint": "As shown on your official ID.",
+          "dateOfBirth": "Date of birth",
+          "phone": "Phone (optional)",
+          "phoneHint": "For reminders. We do not share your number."
+        },
+        "errors": {
+          "underage": "You must be 18 or older to use the platform.",
+          "invalidDob": "Invalid date of birth."
+        }
+      },
+      "residency": {
+        "title": "Utah residency verification",
+        "subtitle": "We need to confirm that you live in Utah. Upload a photo of your Utah driver license or state ID.",
+        "uploadFront": "Upload document front",
+        "uploadBack": "Upload document back",
+        "uploadProof": "Proof of address (optional)",
+        "uploadProofHint": "Utility bill, bank statement or lease — last 60 days.",
+        "submitting": "Uploading...",
+        "submit": "Submit for verification",
+        "submittedTitle": "Documents received",
+        "submittedBody": "An administrator will review your information in 1-2 business days. We will email you.",
+        "fileTooLarge": "File too large (max 10 MB).",
+        "invalidType": "File type not accepted. Use JPG, PNG, WebP or PDF."
+      },
+      "consents": {
+        "title": "Important terms",
+        "subtitle": "Check each box only if you understand and agree. We cannot continue without these terms."
+      },
+      "tutorial": {
+        "title": "How the platform works",
+        "step1": "You choose the service you need from the catalog.",
+        "step2": "You fill out a step-by-step form with your answers.",
+        "step3": "You review the generated document before filing.",
+        "step4": "You pay manually (cash, Zelle, transfer, check) and our admin verifies.",
+        "step5": "If you need legal advice, we connect you with a Utah-licensed allied attorney."
+      },
+      "language": {
+        "title": "Preferred language",
+        "subtitle": "You can change it anytime from your profile.",
+        "spanish": "Español",
+        "english": "English"
+      }
+    },
+    "complete": "Onboarding complete",
+    "completeBody": "You can now explore the available services."
+  },
+  "Identity": {
+    "statusLabel": "Verification status",
+    "statuses": {
+      "submitted": "Received — pending review",
+      "extracting": "Processing documents",
+      "awaiting_user_review": "Awaiting your confirmation",
+      "pending_admin": "Pending administrative approval",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "rejectedNotice": "Your verification was rejected. Reason: {reason}. You can resubmit your documents."
+  },
+  "Filing": {
+    "tabTitle": "Filing by Judicial District",
+    "tabSubtitle": "Official intake and case filing procedures, organized by Utah district.",
+    "disclaimerTitle": "Important notice",
+    "uplDisclaimer": "This platform is NOT a law firm and does NOT provide legal advice. We only help you fill out and file official Utah Courts forms that you review and sign. We operate under the Utah Legal Regulatory Sandbox Phase 2.",
+    "complaintsLeadIn": "To report complaints or feedback about this platform, contact us or report directly to the Utah Office of Legal Services Innovation:",
+    "districtBanner": {
+      "label": "District and county",
+      "title": "District {id}: {name}",
+      "county": "County: {name}",
+      "source": {
+        "identity_doc": "Resolved from your verified ID.",
+        "client_zip": "Resolved from your ZIP code.",
+        "client_address": "Resolved from your address.",
+        "manual_county": "Confirmed by you."
+      }
+    },
+    "narrative": {
+      "title": "Procedure summary"
+    },
+    "stage1": {
+      "heading": "Stage 1 — Filing intake",
+      "subheading": "Administrative steps to deliver your case to the court."
+    },
+    "stage2": {
+      "heading": "Stage 2 — Case filing",
+      "subheading": "Substance of the process after submission."
+    },
+    "fees": {
+      "filingFee": "Official filing fee",
+      "noCost": "No cost",
+      "waiverHint": "You can request a fee waiver using form {code} (Motion to Waive Fees)."
+    },
+    "forms": {
+      "heading": "Official utcourts.gov forms",
+      "code": "Code",
+      "name": "Name",
+      "type": "Format",
+      "actions": "Actions",
+      "viewOfficial": "View official",
+      "empty": "No forms found for this service in this district."
+    },
+    "actions": {
+      "printPacket": "Print official packet",
+      "printForm": "Print",
+      "printing": "Generating…",
+      "submitting": "Processing…",
+      "printError": "Print error: {reason}"
+    },
+    "warnings": {
+      "title": "Procedure warnings"
+    },
+    "sources": {
+      "title": "Verified official sources"
+    },
+    "steps": {
+      "requiresClientAction": "Client action",
+      "systemHandled": "System/Court"
+    },
+    "noStepsYet": "No steps loaded for this district yet. Contact support.",
+    "countyPicker": {
+      "title": "Confirm your county",
+      "subtitle": "We couldn't auto-resolve your county. Select it to continue.",
+      "label": "County",
+      "placeholder": "Select your county",
+      "submit": "Confirm county",
+      "districtGroup": "District {id}",
+      "suggestion": "We detected you mentioned \"{city}\", but it's not in our list. Pick your county from the dropdown."
+    },
+    "notReady": {
+      "title": "Not ready to file yet",
+      "body": "The current case status is \"{status}\". The filing tab is enabled once the case is approved or finalized after QA review."
+    },
+    "serviceNotSupported": {
+      "title": "Service not yet covered",
+      "body": "The service \"{service}\" does not have a filing procedure loaded yet. Notify the team to add it."
+    },
+    "errors": {
+      "missing_address": "We don't have a verified address. Upload your ID or select your county manually.",
+      "identity_not_approved": "Your identity verification is not approved yet. Wait for the team to confirm.",
+      "out_of_state": "The address on file is not in Utah. Confirm your filing county manually.",
+      "city_not_recognized": "The city on your ID isn't in our list. Pick your county manually.",
+      "invalid_county": "The selected county is not valid.",
+      "service_not_supported": "This service does not have a filing procedure yet.",
+      "case_not_found": "We couldn't find the case.",
+      "case_status_invalid": "The case is not ready to file yet.",
+      "venue_violation": "Venue rules suggest filing in a different county. Verify with the self-help center.",
+      "form_unavailable": "An official form is not available. Use the utcourts.gov link.",
+      "internal_error": "An internal error occurred. Try again or contact support.",
+      "unauthorized": "Sign in to continue."
+    }
+  },
+  "Admin": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "clients": "Clients",
+      "identityVerifications": "Identity verifications",
+      "catalog": "Catalog",
+      "compliance": "Compliance",
+      "settings": "Settings"
+    },
+    "dashboard": {
+      "title": "Admin dashboard",
+      "kpis": {
+        "activeUsers": "Active users",
+        "pendingIdentity": "Pending verifications",
+        "openComplaints": "Open complaints"
+      },
+      "comingSoon": "Detailed metrics coming in future sprints."
+    },
+    "identity": {
+      "title": "Identity verifications",
+      "queueLabel": "Review queue",
+      "noPending": "No pending verifications.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "rejectReason": "Rejection reason",
+      "rejectReasonRequired": "You must provide a reason before rejecting."
+    },
+    "catalog": {
+      "title": "Service catalog",
+      "subtitle": "Editing the public catalog. Changes are audited.",
+      "comingSoon": "Full editor arrives in Sprint 5-6."
+    }
+  }
+}

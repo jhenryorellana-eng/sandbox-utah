@@ -1,0 +1,22 @@
+-- ============================================================================
+-- seed.sql — Datos de desarrollo local
+--
+-- Este archivo se ejecuta automáticamente con `supabase db reset`.
+-- Para crear un admin local:
+--   1. `pnpm db:start` (Supabase local).
+--   2. Crear un user manual via signup en /es/register.
+--   3. Una vez confirmado, anotar el UUID del usuario (Studio → Authentication).
+--   4. Editar la línea `-- INSERT INTO user_roles ...` debajo, descomentar y
+--      reemplazar '<UUID>' con el UUID real.
+--   5. `pnpm db:reset` para aplicar.
+--
+-- En producción, los admins se promueven manualmente desde el Studio o via SQL.
+-- ============================================================================
+
+-- Ejemplo (descomentar y reemplazar UUID después de signup local):
+-- INSERT INTO public.user_roles (user_id, role)
+-- VALUES ('<UUID>', 'admin')
+-- ON CONFLICT (user_id, role) DO NOTHING;
+
+-- Sprint 1-2: sin datos seed. Service catalog, lawyers, etc. llegan en sprints
+-- posteriores cuando esas tablas existan.

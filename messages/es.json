@@ -1,0 +1,337 @@
+{
+  "Meta": {
+    "title": "USA Latino Prime Utah",
+    "titleTemplate": "%s | USA Latino Prime Utah",
+    "description": "Plataforma legal bilingüe para residentes de Utah — Utah Legal Sandbox Phase 2"
+  },
+  "Nav": {
+    "home": "Inicio",
+    "login": "Iniciar sesión",
+    "register": "Crear cuenta",
+    "dashboard": "Mis casos",
+    "logout": "Cerrar sesión",
+    "language": "Idioma",
+    "spanish": "Español",
+    "english": "English"
+  },
+  "Landing": {
+    "headline": "Trámites legales en Utah, en tu idioma",
+    "subhead": "Llena formularios de divorcio sin disputa, custodia, vivienda o creación de empresas con asistencia paso a paso. NO manejamos inmigración.",
+    "ctaPrimary": "Crear cuenta gratis",
+    "ctaSecondary": "Ya tengo cuenta",
+    "trustBadge": "Operamos bajo Utah Legal Regulatory Sandbox Phase 2"
+  },
+  "Auth": {
+    "signUpTitle": "Crear cuenta",
+    "signUpSubtitle": "Regístrate para empezar tu trámite",
+    "signInTitle": "Iniciar sesión",
+    "signInSubtitle": "Continúa donde lo dejaste",
+    "verifyTitle": "Verifica tu correo",
+    "verifyBody": "Te enviamos un enlace de confirmación a {email}. Revisa tu bandeja (y la carpeta de spam) y haz clic para activar tu cuenta.",
+    "fields": {
+      "email": "Correo electrónico",
+      "emailPlaceholder": "tu@correo.com",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Mínimo 8 caracteres",
+      "fullName": "Nombre completo",
+      "fullNamePlaceholder": "Como aparece en tu identificación"
+    },
+    "actions": {
+      "signUp": "Crear cuenta",
+      "signIn": "Entrar",
+      "signOut": "Cerrar sesión",
+      "submitting": "Procesando..."
+    },
+    "links": {
+      "haveAccount": "¿Ya tienes cuenta? Inicia sesión",
+      "noAccount": "¿No tienes cuenta? Regístrate",
+      "forgotPassword": "¿Olvidaste tu contraseña?"
+    },
+    "errors": {
+      "invalidCredentials": "Correo o contraseña incorrectos.",
+      "emailTaken": "Ya existe una cuenta con este correo.",
+      "weakPassword": "La contraseña debe tener al menos 8 caracteres.",
+      "invalidEmail": "Correo no válido.",
+      "rateLimited": "Demasiados intentos. Espera unos minutos e intenta de nuevo.",
+      "generic": "Algo salió mal. Intenta de nuevo o contáctanos."
+    }
+  },
+  "Dashboard": {
+    "welcome": "Hola, {name}",
+    "emptyState": "Aún no tienes casos activos.",
+    "createFirstCase": "Crear primer caso (próximamente)"
+  },
+  "Disclaimers": {
+    "complaintBanner": "Esta entidad opera bajo el Utah Legal Regulatory Sandbox. Si tienes una queja o feedback, contáctanos a soporte@usalatinoprime.com o reporta directamente al Utah Office of Legal Services Innovation: https://utahinnovationoffice.org/sandbox-customer-complaint/",
+    "complaintBannerShort": "Reporta quejas: utahinnovationoffice.org/sandbox-customer-complaint/",
+    "notALawFirm": "Esto no es un bufete de abogados. Algunas de las personas que poseen o administran esta compañía no son abogados. Esto significa que algunos servicios o protecciones, como el privilegio abogado-cliente, pueden ser diferentes a los que recibirías de un bufete de abogados.",
+    "notALawFirmShort": "No somos un bufete de abogados. No damos asesoría legal."
+  },
+  "Consents": {
+    "intro": "Antes de continuar, necesitamos que confirmes lo siguiente. Marca cada casilla solo si entiendes y aceptas.",
+    "items": {
+      "is_utah_resident": {
+        "version": "v1.0-2026-05-02",
+        "text": "Confirmo que soy residente del estado de Utah y mayor de 18 años."
+      },
+      "not_a_law_firm": {
+        "version": "v1.0-2026-05-02",
+        "text": "Entiendo que esta plataforma NO es un bufete de abogados y que algunas personas que la administran no son abogados."
+      },
+      "no_legal_advice": {
+        "version": "v1.0-2026-05-02",
+        "text": "Entiendo que esta plataforma NO me proporcionará asesoría legal. Si necesito asesoría, debo consultar con un abogado licenciado en Utah."
+      },
+      "no_immigration": {
+        "version": "v1.0-2026-05-02",
+        "text": "Entiendo que esta plataforma NO maneja temas de inmigración (visas, green cards, USCIS, asilo, deportación, ciudadanía, etc.)."
+      },
+      "accuracy_responsibility": {
+        "version": "v1.0-2026-05-02",
+        "text": "Acepto que soy responsable de revisar y verificar la exactitud de toda la información que proporciono y de cada documento generado antes de presentarlo."
+      },
+      "ai_usage": {
+        "version": "v1.0-2026-05-02",
+        "text": "Acepto que la plataforma use inteligencia artificial (Google Gemini) para ayudarme a organizar la información que yo proporciono, sabiendo que yo reviso y apruebo todo antes de continuar."
+      },
+      "complaint_rights": {
+        "version": "v1.0-2026-05-02",
+        "text": "Entiendo que puedo presentar quejas tanto a esta plataforma como al Utah Office of Legal Services Innovation en https://utahinnovationoffice.org/sandbox-customer-complaint/."
+      },
+      "tos_privacy": {
+        "version": "v1.0-2026-05-02",
+        "text": "He leído y acepto los Términos de Servicio y la Política de Privacidad (UCPA)."
+      }
+    },
+    "submit": "Aceptar todos los términos y continuar",
+    "errorMustAcceptAll": "Debes aceptar todos los términos para continuar."
+  },
+  "Offline": {
+    "title": "Estás sin conexión",
+    "body": "No pudimos cargar esta página. Cuando vuelva la conexión, podrás continuar donde lo dejaste. Si estabas llenando un formulario, tu borrador está guardado localmente.",
+    "retry": "Reintentar"
+  },
+  "Footer": {
+    "company": "USA Latino Prime LLC",
+    "address": "Salt Lake City, Utah",
+    "rights": "© {year} USA Latino Prime LLC. Todos los derechos reservados.",
+    "links": {
+      "terms": "Términos de Servicio",
+      "privacy": "Política de Privacidad",
+      "complaint": "Presentar una queja",
+      "services": "Servicios"
+    }
+  },
+  "Catalog": {
+    "pageTitle": "Servicios disponibles",
+    "pageDescription": "Tres áreas: Familia (sin disputa), Vivienda (defensa de desalojo) y Empresarial (LLC, DBA, contratos). El usuario decide qué servicio iniciar — la plataforma no recomienda.",
+    "immigrationNotice": "Importante: NO ofrecemos servicios de inmigración. Para asuntos migratorios consulta con un abogado de inmigración licenciado.",
+    "empty": "Catálogo no disponible. Vuelve más tarde.",
+    "whatIncludes": "Qué incluye",
+    "whatDoesNotInclude": "Qué NO incluye",
+    "minutes": "minutos estimados",
+    "startCase": "Iniciar este caso",
+    "disclaimerInline": "Este servicio NO incluye asesoría legal personalizada. La plataforma te ayuda a llenar el formulario con la información que tú proporcionas. Si necesitas asesoría, consulta con un abogado licenciado en Utah.",
+    "categories": {
+      "family": "Familia",
+      "housing": "Vivienda",
+      "business": "Empresarial"
+    }
+  },
+  "Onboarding": {
+    "title": "Bienvenido a USA Latino Prime Utah",
+    "stepOf": "Paso {step} de {total}",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "saveAndExit": "Guardar y salir",
+    "skip": "Omitir por ahora",
+    "steps": {
+      "personal": {
+        "title": "Información personal",
+        "subtitle": "Necesitamos tus datos básicos para crear tu perfil.",
+        "fields": {
+          "fullName": "Nombre legal completo",
+          "fullNameHint": "Como aparece en tu identificación oficial.",
+          "dateOfBirth": "Fecha de nacimiento",
+          "phone": "Teléfono (opcional)",
+          "phoneHint": "Para recordatorios. No compartimos tu número."
+        },
+        "errors": {
+          "underage": "Debes ser mayor de 18 años para usar la plataforma.",
+          "invalidDob": "Fecha de nacimiento inválida."
+        }
+      },
+      "residency": {
+        "title": "Verificación de residencia Utah",
+        "subtitle": "Necesitamos confirmar que vives en Utah. Sube una foto de tu licencia de conducir o ID estatal de Utah.",
+        "uploadFront": "Subir frente del documento",
+        "uploadBack": "Subir reverso del documento",
+        "uploadProof": "Comprobante de domicilio (opcional)",
+        "uploadProofHint": "Utility bill, bank statement o lease — últimos 60 días.",
+        "submitting": "Subiendo...",
+        "submit": "Enviar para verificación",
+        "submittedTitle": "Documentos recibidos",
+        "submittedBody": "Un administrador revisará tu información en 1-2 días hábiles. Te avisaremos por correo.",
+        "fileTooLarge": "El archivo es muy grande (máx 10 MB).",
+        "invalidType": "Tipo de archivo no aceptado. Usa JPG, PNG, WebP o PDF."
+      },
+      "consents": {
+        "title": "Términos importantes",
+        "subtitle": "Marca cada casilla solo si entiendes y aceptas. No podemos continuar sin estos términos."
+      },
+      "tutorial": {
+        "title": "Cómo funciona la plataforma",
+        "step1": "Tú eliges el servicio que necesitas del catálogo.",
+        "step2": "Llenas un formulario paso a paso con tus respuestas.",
+        "step3": "Revisas el documento generado antes de presentar.",
+        "step4": "Pagas manualmente (efectivo, Zelle, transferencia, cheque) y nuestro admin verifica.",
+        "step5": "Si necesitas asesoría legal, te conectamos con un abogado aliado licenciado en Utah."
+      },
+      "language": {
+        "title": "Idioma preferido",
+        "subtitle": "Puedes cambiarlo en cualquier momento desde tu perfil.",
+        "spanish": "Español",
+        "english": "English"
+      }
+    },
+    "complete": "Onboarding completado",
+    "completeBody": "Ya puedes explorar los servicios disponibles."
+  },
+  "Identity": {
+    "statusLabel": "Estado de verificación",
+    "statuses": {
+      "submitted": "Recibido — pendiente de revisión",
+      "extracting": "Procesando documentos",
+      "awaiting_user_review": "Esperando tu confirmación",
+      "pending_admin": "Pendiente de aprobación administrativa",
+      "approved": "Aprobado",
+      "rejected": "Rechazado"
+    },
+    "rejectedNotice": "Tu verificación fue rechazada. Razón: {reason}. Puedes volver a enviar tus documentos."
+  },
+  "Filing": {
+    "tabTitle": "Radicación por Distrito Judicial",
+    "tabSubtitle": "Procedimientos oficiales de presentación y radicación del caso, organizados por distrito de Utah.",
+    "disclaimerTitle": "Aviso importante",
+    "uplDisclaimer": "Esta plataforma NO es un bufete de abogados ni te ofrece asesoría legal. Solo te ayudamos a llenar y radicar formularios oficiales de Utah Courts que tú revisas y firmas. Operamos bajo el Utah Legal Regulatory Sandbox Phase 2.",
+    "complaintsLeadIn": "Para reportar quejas o feedback sobre esta plataforma, contáctanos o reporta directamente al Utah Office of Legal Services Innovation:",
+    "districtBanner": {
+      "label": "Distrito y condado",
+      "title": "Distrito {id}: {name}",
+      "county": "Condado: {name}",
+      "source": {
+        "identity_doc": "Resuelto desde tu identificación verificada.",
+        "client_zip": "Resuelto desde tu código postal.",
+        "client_address": "Resuelto desde tu dirección.",
+        "manual_county": "Confirmado por ti."
+      }
+    },
+    "narrative": {
+      "title": "Resumen del procedimiento"
+    },
+    "stage1": {
+      "heading": "Etapa 1 — Radicación de la presentación",
+      "subheading": "Pasos administrativos para entregar tu caso al court."
+    },
+    "stage2": {
+      "heading": "Etapa 2 — Radicación del caso",
+      "subheading": "Sustancia del proceso después de presentar."
+    },
+    "fees": {
+      "filingFee": "Filing fee oficial",
+      "noCost": "Sin costo",
+      "waiverHint": "Puedes solicitar exención de costos con el formulario {code} (Motion to Waive Fees)."
+    },
+    "forms": {
+      "heading": "Formularios oficiales de utcourts.gov",
+      "code": "Código",
+      "name": "Nombre",
+      "type": "Formato",
+      "actions": "Acciones",
+      "viewOfficial": "Ver oficial",
+      "empty": "No hay formularios para este servicio en este distrito."
+    },
+    "actions": {
+      "printPacket": "Imprimir paquete oficial",
+      "printForm": "Imprimir",
+      "printing": "Generando…",
+      "submitting": "Procesando…",
+      "printError": "Error al imprimir: {reason}"
+    },
+    "warnings": {
+      "title": "Advertencias del procedimiento"
+    },
+    "sources": {
+      "title": "Fuentes oficiales verificadas"
+    },
+    "steps": {
+      "requiresClientAction": "Acción del cliente",
+      "systemHandled": "Sistema/Corte"
+    },
+    "noStepsYet": "Aún no hay pasos cargados para este distrito. Contacta a soporte.",
+    "countyPicker": {
+      "title": "Confirma tu condado",
+      "subtitle": "No pudimos resolver automáticamente tu condado. Selecciónalo para continuar.",
+      "label": "Condado",
+      "placeholder": "Selecciona tu condado",
+      "submit": "Confirmar condado",
+      "districtGroup": "Distrito {id}",
+      "suggestion": "Detectamos que mencionaste \"{city}\", pero no está en nuestra lista. Selecciona tu condado del dropdown."
+    },
+    "notReady": {
+      "title": "Aún no es momento de radicar",
+      "body": "El estado actual del caso es \"{status}\". La pestaña de radicación se habilita cuando el caso está aprobado o finalizado tras la revisión QA."
+    },
+    "serviceNotSupported": {
+      "title": "Servicio aún no cubierto",
+      "body": "El servicio \"{service}\" aún no tiene un procedimiento de radicación cargado. Avisa al equipo para que se sume."
+    },
+    "errors": {
+      "missing_address": "No tenemos una dirección verificada. Sube tu identificación o selecciona tu condado manualmente.",
+      "identity_not_approved": "Tu verificación de identidad aún no está aprobada. Espera a que el equipo la confirme.",
+      "out_of_state": "La dirección registrada no es de Utah. Confirma tu condado de filing manualmente.",
+      "city_not_recognized": "La ciudad de tu identificación no está en nuestra lista. Selecciona tu condado manualmente.",
+      "invalid_county": "El condado seleccionado no es válido.",
+      "service_not_supported": "Este servicio aún no tiene un procedimiento de filing.",
+      "case_not_found": "No encontramos el caso.",
+      "case_status_invalid": "El caso aún no está listo para radicar.",
+      "venue_violation": "La regla de venue indica que deberías presentar en otro condado. Verifica con el self-help center.",
+      "form_unavailable": "Un formulario oficial no está disponible. Usa el enlace de utcourts.gov.",
+      "internal_error": "Ocurrió un error interno. Intenta de nuevo o contacta a soporte.",
+      "unauthorized": "Inicia sesión para continuar."
+    }
+  },
+  "Admin": {
+    "nav": {
+      "dashboard": "Panel",
+      "clients": "Clientes",
+      "identityVerifications": "Verificaciones de identidad",
+      "catalog": "Catálogo",
+      "compliance": "Compliance",
+      "settings": "Ajustes"
+    },
+    "dashboard": {
+      "title": "Panel administrativo",
+      "kpis": {
+        "activeUsers": "Usuarios activos",
+        "pendingIdentity": "Verificaciones pendientes",
+        "openComplaints": "Quejas abiertas"
+      },
+      "comingSoon": "Métricas detalladas llegarán en sprints futuros."
+    },
+    "identity": {
+      "title": "Verificaciones de identidad",
+      "queueLabel": "Cola de revisión",
+      "noPending": "No hay verificaciones pendientes.",
+      "approve": "Aprobar",
+      "reject": "Rechazar",
+      "rejectReason": "Razón del rechazo",
+      "rejectReasonRequired": "Debes especificar una razón antes de rechazar."
+    },
+    "catalog": {
+      "title": "Catálogo de servicios",
+      "subtitle": "Edición del catálogo público. Los cambios son auditados.",
+      "comingSoon": "El editor completo llega en Sprint 5-6."
+    }
+  }
+}

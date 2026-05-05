@@ -1,0 +1,124 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Quality (typecheck + lint + unit + RLS)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Verify server-only imports
+        run: pnpm verify:server-imports
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Apply migrations to ephemeral Postgres
+        env:
+          PGPASSWORD: postgres
+        run: |
+          # Crear schema 'auth' minimal para que las migraciones que referencian
+          # auth.users compilen. En Supabase real, este schema lo provee el stack.
+          psql -h localhost -U postgres -d postgres -v ON_ERROR_STOP=1 <<'SQL'
+          create schema if not exists auth;
+          create table if not exists auth.users (
+            id uuid primary key default gen_random_uuid(),
+            email text,
+            raw_user_meta_data jsonb default '{}'::jsonb
+          );
+          SQL
+          for f in supabase/migrations/*.sql; do
+            echo "Applying $f"
+            psql -h localhost -U postgres -d postgres -v ON_ERROR_STOP=1 -f "$f"
+          done
+
+      - name: Verify RLS + audit_log RULES + grants
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+        run: pnpm verify:rls
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Next.js build (with PWA service worker)
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: anon-key-stub-for-build-only-not-secret
+          SUPABASE_SERVICE_ROLE_KEY: service-role-stub-for-build-only-not-secret
+          NEXT_PUBLIC_SITE_URL: http://localhost:3000
+
+  e2e:
+    name: E2E (Playwright)
+    runs-on: ubuntu-latest
+    needs: quality
+    if: false  # Habilitar cuando exista un proyecto Supabase de staging y secrets configurados
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm dlx playwright install --with-deps chromium
+      - run: pnpm build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL_TEST }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_TEST }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_TEST }}
+          NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      - run: pnpm test:e2e
+        env:
+          PLAYWRIGHT_BASE_URL: http://localhost:3000
