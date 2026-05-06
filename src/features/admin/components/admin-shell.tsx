@@ -6,20 +6,20 @@ interface NavItem {
   href: string
   labelKey:
     | "dashboard"
-    | "clients"
     | "identityVerifications"
+    | "payments"
     | "catalog"
+    | "complaints"
     | "compliance"
-    | "settings"
 }
 
 const NAV: NavItem[] = [
   { href: "/admin", labelKey: "dashboard" },
-  { href: "/admin/clients", labelKey: "clients" },
   { href: "/admin/identity-verifications", labelKey: "identityVerifications" },
+  { href: "/admin/payments", labelKey: "payments" },
   { href: "/admin/catalog", labelKey: "catalog" },
+  { href: "/admin/complaints", labelKey: "complaints" },
   { href: "/admin/compliance", labelKey: "compliance" },
-  { href: "/admin/settings", labelKey: "settings" },
 ]
 
 export function AdminShell({

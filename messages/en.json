@@ -304,11 +304,11 @@
   "Admin": {
     "nav": {
       "dashboard": "Dashboard",
-      "clients": "Clients",
       "identityVerifications": "Identity verifications",
+      "payments": "Payments",
       "catalog": "Catalog",
-      "compliance": "Compliance",
-      "settings": "Settings"
+      "complaints": "Complaints",
+      "compliance": "Compliance"
     },
     "dashboard": {
       "title": "Admin dashboard",

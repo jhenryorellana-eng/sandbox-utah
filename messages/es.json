@@ -304,11 +304,11 @@
   "Admin": {
     "nav": {
       "dashboard": "Panel",
-      "clients": "Clientes",
       "identityVerifications": "Verificaciones de identidad",
+      "payments": "Pagos",
       "catalog": "Catálogo",
-      "compliance": "Compliance",
-      "settings": "Ajustes"
+      "complaints": "Quejas",
+      "compliance": "Compliance"
     },
     "dashboard": {
       "title": "Panel administrativo",
