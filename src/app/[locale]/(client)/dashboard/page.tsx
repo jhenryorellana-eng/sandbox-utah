@@ -4,6 +4,8 @@ import { setRequestLocale } from "next-intl/server"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { signOutAction } from "@/features/auth/actions/sign-out"
+import { CaseListCard } from "@/features/cases/components/case-list-card"
+import { type CaseWithService, fetchCasesByClient } from "@/features/cases/repository"
 import { fetchUserActiveVerification } from "@/features/identity/repository"
 import { Link } from "@/lib/i18n/navigation"
 import type { Locale } from "@/lib/i18n/routing"
@@ -26,6 +28,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
     .single()
 
   const verification = await fetchUserActiveVerification(user.id)
+  const cases = await fetchCasesByClient(user.id)
 
   const onboardingComplete = !!profile?.full_name && !!profile?.date_of_birth
   const residencyApproved = !!profile?.utah_residency_verified
@@ -41,6 +44,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
       residencyApproved={residencyApproved}
       verificationStatus={verification?.status ?? null}
       rejectionReason={verification?.rejection_reason ?? null}
+      cases={cases}
     />
   )
 }
@@ -52,6 +56,7 @@ function Dashboard({
   residencyApproved,
   verificationStatus,
   rejectionReason,
+  cases,
 }: {
   locale: Locale
   displayName: string
@@ -59,10 +64,18 @@ function Dashboard({
   residencyApproved: boolean
   verificationStatus: string | null
   rejectionReason: string | null
+  cases: CaseWithService[]
 }) {
   const t = useTranslations("Dashboard")
   const tNav = useTranslations("Nav")
   const tIdentity = useTranslations("Identity")
+
+  const activeCases = cases.filter(
+    (c) => c.intake_status !== "archived" && c.intake_status !== "cancelled",
+  )
+  const archivedCases = cases.filter(
+    (c) => c.intake_status === "archived" || c.intake_status === "cancelled",
+  )
 
   return (
     <section className="mx-auto w-full max-w-screen-xl flex-1 px-4 py-12">
@@ -120,22 +133,65 @@ function Dashboard({
         </Card>
       )}
 
-      <Card>
-        <CardHeader>
-          <CardTitle>{t("emptyState")}</CardTitle>
-          <CardDescription>
-            Explora los servicios disponibles para empezar tu primer trámite.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex gap-2">
-          <Button asChild>
-            <Link href="/services">Ver servicios</Link>
+      <div className="space-y-3">
+        <header className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-semibold">
+              {locale === "es" ? "Mis casos activos" : "My active cases"}
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              {activeCases.length === 0
+                ? locale === "es"
+                  ? "Aún no tienes casos. Inicia uno para comenzar."
+                  : "No active cases yet. Start one to begin."
+                : locale === "es"
+                  ? `${activeCases.length} caso(s) en curso.`
+                  : `${activeCases.length} case(s) in progress.`}
+            </p>
+          </div>
+          <Button asChild disabled={!onboardingComplete || !residencyApproved}>
+            <Link href="/services">
+              {locale === "es" ? "+ Iniciar nuevo caso" : "+ Start new case"}
+            </Link>
           </Button>
-          <Button variant="outline" disabled>
-            {t("createFirstCase")}
-          </Button>
-        </CardContent>
-      </Card>
+        </header>
+
+        {activeCases.length === 0 ? (
+          <Card>
+            <CardHeader>
+              <CardTitle>{t("emptyState")}</CardTitle>
+              <CardDescription>
+                Explora los servicios disponibles para empezar tu primer trámite.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex gap-2">
+              <Button asChild>
+                <Link href="/services">Ver servicios</Link>
+              </Button>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid gap-3 md:grid-cols-2">
+            {activeCases.map((c) => (
+              <CaseListCard key={c.id} caseRow={c} locale={locale} />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {archivedCases.length > 0 ? (
+        <details className="mt-8">
+          <summary className="cursor-pointer text-sm font-medium text-muted-foreground">
+            {locale === "es" ? "Casos archivados/cancelados" : "Archived/cancelled cases"} (
+            {archivedCases.length})
+          </summary>
+          <div className="mt-3 grid gap-3 md:grid-cols-2">
+            {archivedCases.map((c) => (
+              <CaseListCard key={c.id} caseRow={c} locale={locale} />
+            ))}
+          </div>
+        </details>
+      ) : null}
     </section>
   )
 }

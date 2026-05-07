@@ -3,9 +3,10 @@ import { setRequestLocale } from "next-intl/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { PaymentActionsForm } from "@/features/admin/components/payment-actions-form"
 import { requireAdmin } from "@/features/admin/guard"
-import { fetchCaseAdmin } from "@/features/cases/repository"
+import { fetchCaseAdmin, fetchCaseMinors } from "@/features/cases/repository"
 import { CreatePlanForm } from "@/features/payments/components/create-plan-form"
 import { fetchPaymentsForCase, fetchPlanForCase } from "@/features/payments/repository"
+import { Link } from "@/lib/i18n/navigation"
 import type { Locale } from "@/lib/i18n/routing"
 import { createServiceClient } from "@/lib/supabase/server"
 import { Money } from "@/shared/domain/money"
@@ -40,7 +41,15 @@ export default async function AdminCaseDetailPage({
 
   // Plan + payments + cliente + contrato (vía service-role, admin ya validado)
   const service = createServiceClient()
-  const [{ data: client }, { data: contract }, plan, payments] = await Promise.all([
+  const [
+    { data: client },
+    { data: contract },
+    plan,
+    payments,
+    minors,
+    { data: documents },
+    { data: formResponses },
+  ] = await Promise.all([
     service
       .from("profiles")
       .select("full_name, email, preferred_language")
@@ -55,7 +64,26 @@ export default async function AdminCaseDetailPage({
       .maybeSingle(),
     fetchPlanForCase(id, caseRow.client_id),
     fetchPaymentsForCase(id, caseRow.client_id),
+    fetchCaseMinors(id),
+    service
+      .from("documents")
+      .select(
+        "id, filename, status, extraction_status, minor_label, document_type_id, extracted_data",
+      )
+      .eq("case_id", id)
+      .is("deleted_at", null)
+      .order("created_at", { ascending: false }),
+    service
+      .from("form_responses")
+      .select("id, form_slug, status, last_printed_at, print_count")
+      .eq("case_id", id)
+      .order("updated_at", { ascending: false }),
   ])
+  const tierLabel = caseRow.tier
+    ? locale === "es"
+      ? caseRow.tier.label_es
+      : caseRow.tier.label_en
+    : null
 
   const totalPaid = payments
     .filter((p) => p.status === "verified")
@@ -73,7 +101,21 @@ export default async function AdminCaseDetailPage({
           {caseRow.case_number}
         </p>
         <h1 className="mt-1 text-3xl font-semibold tracking-tight">{caseRow.display_name}</h1>
-        <p className="text-sm text-muted-foreground">{serviceName}</p>
+        <p className="text-sm text-muted-foreground">
+          {serviceName}
+          {tierLabel ? ` · ${tierLabel}` : ""}
+          {client?.full_name ? ` · cliente: ${client.full_name}` : ""}
+        </p>
+        {client ? (
+          <p className="mt-1 text-xs text-muted-foreground">
+            <Link
+              href={`/admin/clients/${caseRow.client_id}` as never}
+              className="text-primary hover:underline"
+            >
+              Ver todos los casos del cliente
+            </Link>
+          </p>
+        ) : null}
       </header>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -221,6 +263,97 @@ export default async function AdminCaseDetailPage({
           </CardContent>
         </Card>
       )}
+
+      {/* Beneficiarios */}
+      {minors.length > 0 ? (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Beneficiarios ({minors.length})</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-1 text-sm">
+              {minors.map((m) => (
+                <li key={m.id}>
+                  <span className="font-medium">{m.full_name}</span>
+                  {m.date_of_birth ? (
+                    <span className="text-muted-foreground"> · {m.date_of_birth}</span>
+                  ) : null}
+                  {m.document_number ? (
+                    <span className="text-muted-foreground"> · doc: {m.document_number}</span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      ) : null}
+
+      {/* Documentos */}
+      {documents && documents.length > 0 ? (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Documentos del cliente ({documents.length})</CardTitle>
+            <CardDescription>
+              La extracción IA permite ver los datos estructurados leídos de cada archivo.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-2 text-sm">
+              {documents.map((d) => (
+                <li key={d.id} className="rounded-md border border-border p-2.5">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <a
+                      href={`/api/documents/${d.id}/signed-url`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-primary hover:underline"
+                    >
+                      {d.filename}
+                    </a>
+                    <span className="text-xs text-muted-foreground">
+                      {d.minor_label ? `Para: ${d.minor_label} · ` : ""}
+                      {d.status} · IA: {d.extraction_status}
+                    </span>
+                  </div>
+                  {d.extracted_data ? (
+                    <details className="mt-2">
+                      <summary className="cursor-pointer text-xs text-muted-foreground">
+                        Datos extraídos por IA
+                      </summary>
+                      <pre className="mt-1 overflow-x-auto rounded bg-muted/40 p-2 text-xs">
+                        {JSON.stringify(d.extracted_data, null, 2)}
+                      </pre>
+                    </details>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      ) : null}
+
+      {/* Formularios */}
+      {formResponses && formResponses.length > 0 ? (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">
+              Formularios respondidos ({formResponses.length})
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-1 text-sm">
+              {formResponses.map((f) => (
+                <li key={f.id} className="flex flex-wrap justify-between gap-2">
+                  <span className="font-mono text-xs">{f.form_slug}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {f.status} · impreso {f.print_count} {f.print_count === 1 ? "vez" : "veces"}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      ) : null}
 
       {/* Pagos verificados / rechazados */}
       {payments.length > reportedNotVerified.length && (

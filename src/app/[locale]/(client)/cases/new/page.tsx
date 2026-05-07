@@ -34,7 +34,7 @@ export default async function NewCasePage({
     locale === "es" ? result.service.beneficiary_label_es : result.service.beneficiary_label_en
 
   return (
-    <section className="mx-auto w-full max-w-xl flex-1 px-4 py-12">
+    <section className="mx-auto w-full max-w-2xl flex-1 px-4 py-12">
       <Card>
         <CardHeader>
           <CardTitle>Iniciar: {name}</CardTitle>
@@ -49,7 +49,18 @@ export default async function NewCasePage({
               name,
               beneficiaryLabel,
               allowsMultipleBeneficiaries: result.service.allows_multiple_beneficiaries,
+              basePriceCents: result.service.base_price_cents,
             }}
+            tiers={result.tiers.map((t) => ({
+              id: t.id,
+              beneficiaries_count: t.beneficiaries_count,
+              price_cents: t.price_cents,
+              label_es: t.label_es,
+              label_en: t.label_en,
+              description_es: t.description_es,
+              description_en: t.description_en,
+            }))}
+            locale={locale}
           />
         </CardContent>
       </Card>

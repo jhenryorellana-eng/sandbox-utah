@@ -79,6 +79,17 @@ export type AiTaskType =
   | "filing_narrative"
   | "other"
 
+export type ExtractionStatus =
+  | "pending"
+  | "extracting"
+  | "extracted"
+  | "extraction_failed"
+  | "skipped"
+
+export type DocumentSlotKind = "single" | "dual_es_en" | "multiple_named"
+
+export type FormResponseStatus = "draft" | "submitted" | "printed"
+
 // ============================================================================
 // Filing — pestaña Radicación por Distrito
 // ============================================================================
@@ -328,6 +339,10 @@ export interface Database {
           is_required_default: boolean
           accepts_file_types: string[]
           max_size_bytes: number
+          is_per_minor: boolean
+          slot_kind: DocumentSlotKind
+          extraction_schema_slug: string | null
+          conditional_logic: Json | null
           created_at: string
         }
         Insert: {
@@ -340,6 +355,10 @@ export interface Database {
           is_required_default?: boolean
           accepts_file_types?: string[]
           max_size_bytes?: number
+          is_per_minor?: boolean
+          slot_kind?: DocumentSlotKind
+          extraction_schema_slug?: string | null
+          conditional_logic?: Json | null
         }
         Update: Partial<Database["public"]["Tables"]["document_types"]["Insert"]>
         Relationships: []
@@ -397,6 +416,8 @@ export interface Database {
           case_number: string
           client_id: string
           service_id: string
+          service_tier_id: string | null
+          beneficiary_count: number | null
           display_name: string
           beneficiary_data: Json | null
           intake_status: IntakeStatus
@@ -423,6 +444,8 @@ export interface Database {
         Insert: {
           client_id: string
           service_id: string
+          service_tier_id?: string | null
+          beneficiary_count?: number | null
           display_name: string
           beneficiary_data?: Json | null
           intake_status?: IntakeStatus
@@ -657,6 +680,8 @@ export interface Database {
           case_id: string
           client_id: string
           document_type_id: string | null
+          minor_id: string | null
+          minor_label: string | null
           storage_path: string
           filename: string
           mime_type: string
@@ -668,6 +693,12 @@ export interface Database {
           status: DocumentStatus
           review_notes: string | null
           version: number
+          extraction_status: ExtractionStatus
+          extraction_attempts: number
+          extracted_text: string | null
+          extracted_data: Json | null
+          extracted_at: string | null
+          extraction_error: string | null
           created_at: string
           deleted_at: string | null
         }
@@ -675,6 +706,8 @@ export interface Database {
           case_id: string
           client_id: string
           document_type_id?: string | null
+          minor_id?: string | null
+          minor_label?: string | null
           storage_path: string
           filename: string
           mime_type: string
@@ -685,11 +718,23 @@ export interface Database {
           is_signed?: boolean
           status?: DocumentStatus
           version?: number
+          extraction_status?: ExtractionStatus
+          extraction_attempts?: number
+          extracted_text?: string | null
+          extracted_data?: Json | null
+          extracted_at?: string | null
+          extraction_error?: string | null
         }
         Update: Partial<Database["public"]["Tables"]["documents"]["Insert"]> & {
           status?: DocumentStatus
           review_notes?: string | null
           deleted_at?: string | null
+          extraction_status?: ExtractionStatus
+          extraction_attempts?: number
+          extracted_text?: string | null
+          extracted_data?: Json | null
+          extracted_at?: string | null
+          extraction_error?: string | null
         }
         Relationships: []
       }
@@ -1115,6 +1160,114 @@ export interface Database {
         }
         Update: never
         Relationships: []
+      }
+      service_tiers: {
+        Row: {
+          id: string
+          service_id: string
+          beneficiaries_count: number
+          price_cents: number
+          label_es: string
+          label_en: string
+          description_es: string | null
+          description_en: string | null
+          display_order: number
+          is_active: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          service_id: string
+          beneficiaries_count: number
+          price_cents: number
+          label_es: string
+          label_en: string
+          description_es?: string | null
+          description_en?: string | null
+          display_order?: number
+          is_active?: boolean
+        }
+        Update: Partial<Database["public"]["Tables"]["service_tiers"]["Insert"]>
+        Relationships: [
+          {
+            foreignKeyName: "service_tiers_service_id_fkey"
+            columns: ["service_id"]
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      case_minors: {
+        Row: {
+          id: string
+          case_id: string
+          display_index: number
+          full_name: string
+          date_of_birth: string | null
+          document_number: string | null
+          notes: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          case_id: string
+          display_index: number
+          full_name: string
+          date_of_birth?: string | null
+          document_number?: string | null
+          notes?: string | null
+        }
+        Update: Partial<Database["public"]["Tables"]["case_minors"]["Insert"]>
+        Relationships: [
+          {
+            foreignKeyName: "case_minors_case_id_fkey"
+            columns: ["case_id"]
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      form_responses: {
+        Row: {
+          id: string
+          case_id: string
+          client_id: string
+          form_slug: string
+          responses: Json
+          prefilled_from: Json | null
+          status: FormResponseStatus
+          last_printed_at: string | null
+          print_count: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          case_id: string
+          client_id: string
+          form_slug: string
+          responses?: Json
+          prefilled_from?: Json | null
+          status?: FormResponseStatus
+        }
+        Update: Partial<Database["public"]["Tables"]["form_responses"]["Insert"]> & {
+          status?: FormResponseStatus
+          last_printed_at?: string | null
+          print_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "form_responses_case_id_fkey"
+            columns: ["case_id"]
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "form_responses_client_id_fkey"
+            columns: ["client_id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: Record<string, never>
