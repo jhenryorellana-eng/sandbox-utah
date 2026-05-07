@@ -16,9 +16,12 @@ function Landing() {
 
   return (
     <>
-      <section className="relative isolate flex min-h-[calc(86svh-7rem)] flex-1 overflow-hidden px-4 py-14 sm:py-20">
+      <section className="relative isolate flex min-h-[calc(86svh-7rem)] flex-1 px-4 py-14 sm:py-20">
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(105deg,oklch(1_0_0_/_92%)_0_40%,oklch(0.31_0.101_257_/_10%)_40%_100%)]" />
-        <div className="absolute inset-y-0 right-0 -z-10 hidden w-[56%] lg:block">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 -z-10 hidden w-[56%] overflow-hidden lg:block"
+        >
           <HeroVisual />
         </div>
 

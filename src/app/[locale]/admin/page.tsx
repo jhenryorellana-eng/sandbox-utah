@@ -36,13 +36,13 @@ function Dashboard({
   const t = useTranslations("Admin.dashboard")
   return (
     <section className="space-y-6">
-      <header className="glass-panel rounded-lg p-5 sm:p-6">
+      <div className="glass-panel rounded-lg p-5 sm:p-6">
         <p className="brand-kicker">Admin console</p>
         <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">{t("title")}</h1>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
           Operacion diaria: identidad, pagos, catalogo y reportes del Utah Sandbox.
         </p>
-      </header>
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
         <Kpi icon={UsersRound} label={t("kpis.activeUsers")} value={activeUsers} />

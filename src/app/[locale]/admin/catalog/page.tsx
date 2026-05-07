@@ -15,7 +15,7 @@ export default async function AdminCatalogPage({
 
   return (
     <section className="space-y-6">
-      <header className="glass-panel rounded-lg p-5 sm:p-6">
+      <div className="glass-panel rounded-lg p-5 sm:p-6">
         <p className="brand-kicker">
           <BookOpen className="size-3.5" aria-hidden />
           Servicios
@@ -27,7 +27,7 @@ export default async function AdminCatalogPage({
           Edita servicios, precios base y tiers por numero de beneficiarios. Cada cambio queda
           registrado en el audit log.
         </p>
-      </header>
+      </div>
       <CatalogEditor catalog={catalog} />
     </section>
   )

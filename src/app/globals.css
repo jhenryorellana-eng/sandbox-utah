@@ -92,6 +92,12 @@
     border-color: var(--color-border);
   }
 
+  *:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+    border-radius: 0.375rem;
+  }
+
   html {
     min-height: 100%;
     scroll-behavior: smooth;

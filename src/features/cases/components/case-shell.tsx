@@ -51,7 +51,7 @@ export function CaseShell({ caseRow, locale, currentTab, children }: CaseShellPr
 
   return (
     <section className="page-shell max-w-5xl flex-1">
-      <header className="glass-panel mb-4 rounded-lg p-5 sm:p-6">
+      <div className="glass-panel mb-4 rounded-lg p-5 sm:p-6">
         <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
           <div className="min-w-0">
             <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
@@ -78,7 +78,7 @@ export function CaseShell({ caseRow, locale, currentTab, children }: CaseShellPr
             {statusLabel}
           </span>
         </div>
-      </header>
+      </div>
       <CaseTabsNav caseId={caseRow.id} current={currentTab} locale={locale} />
       <div className="pt-6">{children}</div>
     </section>

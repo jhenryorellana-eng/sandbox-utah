@@ -71,7 +71,7 @@ export default async function AdminClientDetailPage({
 
   return (
     <section className="space-y-6">
-      <header className="glass-panel rounded-lg p-5 sm:p-6">
+      <div className="glass-panel rounded-lg p-5 sm:p-6">
         <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
           <UserRound className="size-3.5" aria-hidden />
           Cliente
@@ -86,7 +86,7 @@ export default async function AdminClientDetailPage({
           Residencia Utah: {profile.utah_residency_verified ? "verificada" : "no verificada"} ·
           Identidad: {identity?.status ?? "no enviada"} · Idioma: {profile.preferred_language}
         </p>
-      </header>
+      </div>
 
       <Card>
         <CardHeader>

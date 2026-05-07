@@ -23,7 +23,12 @@ const inputSchema = z.object({
   paymentDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
 })
 
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "application/pdf"] as const
+const ALLOWED_TYPES: readonly string[] = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "application/pdf",
+]
 const MAX_BYTES = 10 * 1024 * 1024
 
 export interface ReportPaymentResult {
@@ -33,6 +38,7 @@ export interface ReportPaymentResult {
     | "auth"
     | "validation"
     | "installment_not_found"
+    | "installment_already_reported"
     | "no_proof"
     | "file_too_large"
     | "invalid_type"
@@ -55,14 +61,17 @@ export async function reportPaymentAction(formData: FormData): Promise<ReportPay
     amountCents: Number(formData.get("amountCents") ?? 0),
     paymentDate: String(formData.get("paymentDate") ?? ""),
   })
-  if (!parsed.success) return { ok: false, errorCode: "validation" }
+  if (!parsed.success) {
+    return { ok: false, errorCode: "validation", errorMessage: parsed.error.message }
+  }
 
   const proof = formData.get("proof")
   if (!(proof instanceof File) || proof.size === 0) {
     return { ok: false, errorCode: "no_proof" }
   }
   if (proof.size > MAX_BYTES) return { ok: false, errorCode: "file_too_large" }
-  if (!ALLOWED_TYPES.includes(proof.type as (typeof ALLOWED_TYPES)[number])) {
+  const proofMimeBase = (proof.type.split(";")[0] ?? "").trim()
+  if (!ALLOWED_TYPES.includes(proofMimeBase)) {
     return { ok: false, errorCode: "invalid_type" }
   }
 
@@ -84,6 +93,9 @@ export async function reportPaymentAction(formData: FormData): Promise<ReportPay
   )?.payment_plan
   if (!installment || !plan || plan.client_id !== user.id) {
     return { ok: false, errorCode: "installment_not_found" }
+  }
+  if (installment.status !== "pending" && installment.status !== "overdue") {
+    return { ok: false, errorCode: "installment_already_reported" }
   }
 
   return withCompliance(
@@ -116,12 +128,18 @@ export async function reportPaymentAction(formData: FormData): Promise<ReportPay
         .select("id")
         .single()
       if (insErr || !paymentRow) {
+        if (insErr?.code === "23503") {
+          return { ok: false, errorCode: "installment_not_found" }
+        }
+        if (insErr?.code === "23514") {
+          return { ok: false, errorCode: "validation", errorMessage: insErr.message }
+        }
         return { ok: false, errorCode: "generic", errorMessage: insErr?.message }
       }
 
       const arrayBuffer = await proof.arrayBuffer()
       const hash = await sha256Hex(arrayBuffer)
-      const ext = guessExtension(proof.type) ?? "bin"
+      const ext = guessExtension(proofMimeBase) ?? "bin"
       const path = `${user.id}/${plan.case_id}/${paymentRow.id}.${ext}`
 
       const service = createServiceClient()
@@ -130,17 +148,27 @@ export async function reportPaymentAction(formData: FormData): Promise<ReportPay
         .upload(path, arrayBuffer, { contentType: proof.type, upsert: true })
       if (upErr) return { ok: false, errorCode: "generic", errorMessage: upErr.message }
 
-      await service.from("payment_proofs").insert({
+      const { error: proofErr } = await service.from("payment_proofs").insert({
         payment_id: paymentRow.id,
         storage_path: path,
         filename: proof.name,
-        mime_type: proof.type,
+        mime_type: proofMimeBase,
         size_bytes: proof.size,
         sha256_hash: hash,
         uploaded_by: user.id,
       })
+      if (proofErr) {
+        return { ok: false, errorCode: "generic", errorMessage: proofErr.message }
+      }
 
-      await service.from("installments").update({ status: "reported" }).eq("id", installment.id)
+      const { error: instUpdErr } = await service
+        .from("installments")
+        .update({ status: "reported" })
+        .eq("id", installment.id)
+      if (instUpdErr) {
+        // No bloqueante: el pago ya está registrado, admin puede arreglar manualmente
+        console.error("[reportPaymentAction] installments update failed", instUpdErr.message)
+      }
 
       await appendCaseActivity({
         caseId: plan.case_id,
@@ -148,11 +176,16 @@ export async function reportPaymentAction(formData: FormData): Promise<ReportPay
         actorType: "client",
         activityType: "payment.reported",
         description: `Cliente reportó pago: ${parsed.data.paymentMethod}`,
-        metadata: { paymentId: paymentRow.id, amountCents: parsed.data.amountCents },
+        metadata: {
+          paymentId: paymentRow.id,
+          amountCents: parsed.data.amountCents,
+          installmentId: installment.id,
+        },
       })
 
-      revalidatePath(`/cases/${plan.case_id}/payments`)
-      revalidatePath("/admin/payments")
+      revalidatePath(`/[locale]/cases/${plan.case_id}/payments`, "page")
+      revalidatePath("/[locale]/admin/payments", "page")
+      revalidatePath(`/[locale]/admin/cases/${plan.case_id}`, "page")
       return { ok: true, paymentId: paymentRow.id }
     },
   )

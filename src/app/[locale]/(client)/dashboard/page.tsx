@@ -81,7 +81,7 @@ function Dashboard({
 
   return (
     <section className="page-shell flex-1">
-      <header className="glass-panel mb-8 rounded-lg p-5 sm:p-6">
+      <div className="glass-panel mb-8 rounded-lg p-5 sm:p-6">
         <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
           <div>
             <p className="brand-kicker">
@@ -111,7 +111,7 @@ function Dashboard({
             </Button>
           </form>
         </div>
-      </header>
+      </div>
 
       <div className="mb-6 grid gap-4 sm:grid-cols-3">
         <StatusTile
@@ -176,7 +176,7 @@ function Dashboard({
       )}
 
       <div className="space-y-4">
-        <header className="flex flex-wrap items-end justify-between gap-3">
+        <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="text-2xl font-black tracking-normal">
               {locale === "es" ? "Mis casos activos" : "My active cases"}
@@ -204,7 +204,7 @@ function Dashboard({
               {locale === "es" ? "Verificacion requerida" : "Verification required"}
             </Button>
           )}
-        </header>
+        </div>
 
         {activeCases.length === 0 ? (
           <Card className="lift-card">

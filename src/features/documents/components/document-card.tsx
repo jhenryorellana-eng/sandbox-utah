@@ -42,7 +42,7 @@ export function DocumentCard({
     const current = documents[0]
     return (
       <div className="lift-card rounded-lg border border-white/70 bg-white/78 p-4 shadow-sm backdrop-blur-xl">
-        <header className="mb-2 flex flex-wrap items-start justify-between gap-2">
+        <div className="mb-2 flex flex-wrap items-start justify-between gap-2">
           <div className="min-w-0">
             <h4 className="text-sm font-black">
               {name}
@@ -66,7 +66,7 @@ export function DocumentCard({
               onUploaded={refresh}
             />
           ) : null}
-        </header>
+        </div>
         {current ? (
           <div className="space-y-2">
             <FileRow doc={current} onDeleted={refresh} />
@@ -90,7 +90,7 @@ export function DocumentCard({
   // multiple_named o dual_es_en (este último simplificado a múltiple por ahora)
   return (
     <div className="lift-card rounded-lg border border-white/70 bg-white/78 p-4 shadow-sm backdrop-blur-xl">
-      <header className="mb-2 flex flex-wrap items-start justify-between gap-2">
+      <div className="mb-2 flex flex-wrap items-start justify-between gap-2">
         <div className="min-w-0">
           <h4 className="text-sm font-black">
             {name}
@@ -114,7 +114,7 @@ export function DocumentCard({
           variant="outline"
           onUploaded={refresh}
         />
-      </header>
+      </div>
       {documents.length === 0 ? (
         <p className="text-xs italic text-muted-foreground">
           Sin archivos todavía. Puedes subir uno o más.

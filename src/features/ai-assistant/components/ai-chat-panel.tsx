@@ -54,12 +54,12 @@ export function AiChatPanel({ caseId }: { caseId?: string }) {
 
   return (
     <div className="flex flex-col gap-3 rounded-lg border border-border bg-card p-3 text-sm">
-      <header className="flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <p className="font-medium">Asistente IA (Gemini)</p>
         <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs text-amber-900">
           ⚠ NO da asesoría legal
         </span>
-      </header>
+      </div>
 
       <div className="flex max-h-80 flex-col gap-2 overflow-y-auto rounded-md bg-secondary/30 p-2">
         {messages.length === 0 && (

@@ -23,7 +23,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
 
   return (
     <section className="page-shell flex-1">
-      <header className="mb-10 max-w-4xl animate-in-up">
+      <div className="mb-10 max-w-4xl animate-in-up">
         <p className="brand-kicker">
           <Compass className="size-3.5" aria-hidden />
           Utah services
@@ -38,7 +38,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
           <ShieldAlert className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
           {t("immigrationNotice")}
         </p>
-      </header>
+      </div>
 
       {catalog.length === 0 ? (
         <p className="text-muted-foreground">{t("empty")}</p>

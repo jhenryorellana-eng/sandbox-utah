@@ -75,10 +75,10 @@ export function ConsentsStep({
 
   return (
     <div className="flex flex-col gap-4">
-      <header>
+      <div>
         <h2 className="text-2xl font-semibold tracking-normal">{tStep("title")}</h2>
         <p className="mt-1 text-muted-foreground">{tStep("subtitle")}</p>
-      </header>
+      </div>
 
       <ul className="space-y-3">
         {KEYS.map((key) => (

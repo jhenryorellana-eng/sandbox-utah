@@ -43,10 +43,10 @@ export function ProcedureStage({
 
   return (
     <section className={`rounded-lg border ${styles.border} ${styles.bg} p-4`}>
-      <header className="mb-3">
+      <div className="mb-3">
         <p className={`text-sm font-semibold ${styles.headerText}`}>{heading}</p>
         {subheading ? <p className={`text-xs ${styles.metaText}`}>{subheading}</p> : null}
-      </header>
+      </div>
       {steps.length === 0 ? (
         <p className="text-sm italic text-muted-foreground">{t("noStepsYet")}</p>
       ) : (

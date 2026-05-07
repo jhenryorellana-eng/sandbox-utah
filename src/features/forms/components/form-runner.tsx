@@ -80,7 +80,7 @@ export function FormRunner({
       }}
       className="space-y-6"
     >
-      <header className="glass-panel flex flex-wrap items-center justify-between gap-3 rounded-lg p-4">
+      <div className="glass-panel flex flex-wrap items-center justify-between gap-3 rounded-lg p-4">
         <div>
           <h2 className="text-xl font-black tracking-normal">{formName}</h2>
           <p className="text-xs font-bold text-muted-foreground">
@@ -131,7 +131,7 @@ export function FormRunner({
             {pending ? "..." : locale === "es" ? "Imprimir PDF" : "Print PDF"}
           </Button>
         </div>
-      </header>
+      </div>
 
       {error ? <p className="text-sm text-destructive">{error}</p> : null}
 

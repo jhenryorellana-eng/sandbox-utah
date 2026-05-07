@@ -29,7 +29,7 @@ export default async function AdminCompliancePage({
 
   return (
     <section className="space-y-6">
-      <header className="glass-panel rounded-lg p-5 sm:p-6">
+      <div className="glass-panel rounded-lg p-5 sm:p-6">
         <p className="brand-kicker">
           <FileSearch className="size-3.5" aria-hidden />
           Utah Sandbox
@@ -41,7 +41,7 @@ export default async function AdminCompliancePage({
           Métricas del mes en curso. El reporte oficial al Innovation Office se prepara mensualmente
           con CSV/PDF.
         </p>
-      </header>
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Kpi label="Servicios prestados" value={metrics.servicesProvided.toString()} />

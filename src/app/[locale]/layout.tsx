@@ -78,9 +78,17 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-3 focus:py-2 focus:text-sm focus:font-extrabold focus:text-primary-foreground"
+          >
+            {locale === "es" ? "Saltar al contenido principal" : "Skip to main content"}
+          </a>
           <ComplaintBanner />
           <SiteHeader />
-          <main className="flex flex-1 flex-col">{children}</main>
+          <main id="main-content" className="flex flex-1 flex-col">
+            {children}
+          </main>
           <SiteFooter />
         </NextIntlClientProvider>
       </body>

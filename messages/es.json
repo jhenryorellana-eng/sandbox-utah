@@ -123,6 +123,90 @@
       "services": "Servicios"
     }
   },
+  "Legal": {
+    "lastUpdated": "Última actualización: 7 de mayo de 2026",
+    "backHome": "← Volver al inicio",
+    "terms": {
+      "title": "Términos de Servicio",
+      "subtitle": "Plataforma legal-tech bajo Utah Legal Regulatory Sandbox Phase 2",
+      "sections": {
+        "intro": {
+          "heading": "1. Aceptación",
+          "body": "Al usar USA Latino Prime Utah aceptas estos Términos. Si no estás de acuerdo, no uses la plataforma. Operamos bajo el Utah Legal Regulatory Sandbox Phase 2 con vigencia hasta el 14 de agosto de 2027."
+        },
+        "notALawFirm": {
+          "heading": "2. No somos un bufete de abogados",
+          "body": "Esta plataforma NO es un bufete y NO proporciona asesoría legal. Algunas personas que la administran no son abogados; por eso ciertos servicios o protecciones (como el privilegio abogado-cliente) pueden ser distintos a los de un bufete. Si necesitas asesoría, consulta con un abogado licenciado en Utah."
+        },
+        "scope": {
+          "heading": "3. Alcance del servicio",
+          "body": "Te ayudamos a llenar formularios oficiales de Utah State Courts y radicarlos en tu distrito judicial. NO manejamos temas migratorios (orden Utah Supreme Court del 16 de septiembre de 2024). NO representamos clientes ante la corte."
+        },
+        "userResponsibility": {
+          "heading": "4. Tu responsabilidad",
+          "body": "Eres responsable de revisar y verificar la exactitud de toda la información que proporciones y de cada documento generado antes de presentarlo a la corte. Tu firma sobre los formularios y declaraciones juradas es tuya."
+        },
+        "ai": {
+          "heading": "5. Uso de inteligencia artificial",
+          "body": "Usamos Gemini (Google) para extraer datos de tus documentos y autocompletar formularios. La IA puede equivocarse: siempre revisas el resultado antes de imprimir o firmar. Cada interacción queda registrada en un audit log inmutable."
+        },
+        "fees": {
+          "heading": "6. Tarifas y reembolsos",
+          "body": "Los precios se muestran al iniciar el caso. Aceptamos pagos manuales (zelle, transferencia, efectivo, etc.) verificados por el equipo. Política de reembolso: 7 días desde la firma del contrato siempre que no se haya iniciado el filing."
+        },
+        "termination": {
+          "heading": "7. Terminación",
+          "body": "Puedes cancelar tu caso en cualquier momento antes de que se complete. Nos reservamos el derecho de suspender cuentas que violen estos Términos o la regulación del sandbox."
+        },
+        "complaints": {
+          "heading": "8. Quejas",
+          "body": "Puedes presentar quejas tanto a nosotros (soporte@usalatinoprime.com) como directamente al Utah Office of Legal Services Innovation en https://utahinnovationoffice.org/sandbox-customer-complaint/."
+        },
+        "law": {
+          "heading": "9. Ley aplicable",
+          "body": "Estos Términos se rigen por las leyes del Estado de Utah, EE. UU. Cualquier disputa se resolverá en cortes de Utah."
+        }
+      }
+    },
+    "privacy": {
+      "title": "Política de Privacidad",
+      "subtitle": "Cómo recolectamos, usamos y protegemos tu información",
+      "sections": {
+        "intro": {
+          "heading": "1. Resumen",
+          "body": "Respetamos tu privacidad y cumplimos con la Utah Consumer Privacy Act (UCPA). Esta política describe qué datos recolectamos, cómo los usamos y los derechos que tienes sobre ellos."
+        },
+        "dataCollected": {
+          "heading": "2. Datos que recolectamos",
+          "body": "Email, nombre completo, fecha de nacimiento, teléfono, dirección, identificación oficial (con OCR), documentos del caso (acta de nacimiento, lease, recibos, etc.), datos de pago (método y comprobante; nunca números de tarjeta) y respuestas a formularios oficiales."
+        },
+        "dataUse": {
+          "heading": "3. Cómo usamos tus datos",
+          "body": "Para crear tu cuenta, generar contratos, autocompletar formularios oficiales, procesar pagos manuales, comunicarte el estado de tu caso y cumplir requisitos del sandbox phase 2 (audit log, complaint reporting)."
+        },
+        "thirdParties": {
+          "heading": "4. Terceros (DPA)",
+          "body": "Compartimos datos con: Supabase (hosting BD + Storage), Google Gemini (extracción IA, residencia us-central1), Resend (correos transaccionales), Dropbox Sign (firma digital de contratos) y Stripe (cuando aplique pagos online). Cada proveedor opera bajo su propio DPA."
+        },
+        "retention": {
+          "heading": "5. Retención",
+          "body": "Mantenemos tus datos mientras tu cuenta esté activa más 7 años después del cierre del último caso (requerimiento de auditoría legal). Audit log es inmutable."
+        },
+        "rights": {
+          "heading": "6. Tus derechos UCPA",
+          "body": "Puedes solicitar acceso, corrección, eliminación o portabilidad de tus datos escribiéndonos a privacidad@usalatinoprime.com. Responderemos en 45 días."
+        },
+        "security": {
+          "heading": "7. Seguridad",
+          "body": "RLS en BD por dueño, Storage privado con signed URLs (60s), HTTPS obligatorio, cookies httpOnly, audit log append-only, access mínimo por rol. Reportamos incidentes en máximo 72h al usuario afectado."
+        },
+        "changes": {
+          "heading": "8. Cambios",
+          "body": "Notificaremos cambios materiales por correo y publicaremos la fecha de actualización al inicio de esta página."
+        }
+      }
+    }
+  },
   "Catalog": {
     "pageTitle": "Servicios disponibles",
     "pageDescription": "Tres áreas: Familia (sin disputa), Vivienda (defensa de desalojo) y Empresarial (LLC, DBA, contratos). El usuario decide qué servicio iniciar — la plataforma no recomienda.",

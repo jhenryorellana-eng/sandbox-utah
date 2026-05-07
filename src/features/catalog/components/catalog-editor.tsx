@@ -52,7 +52,7 @@ export function CatalogEditor({ catalog }: CatalogEditorProps) {
       {catalog.map((category) => (
         <Card key={category.id} className="lift-card">
           <CardContent className="space-y-4 py-5">
-            <header className="flex flex-wrap items-end justify-between gap-3">
+            <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
                 <h2 className="text-lg font-black">{category.name_es}</h2>
                 <p className="text-xs font-bold text-muted-foreground">
@@ -69,7 +69,7 @@ export function CatalogEditor({ catalog }: CatalogEditorProps) {
               >
                 + Nuevo servicio
               </Button>
-            </header>
+            </div>
 
             <div className="space-y-3">
               {category.services.length === 0 ? (

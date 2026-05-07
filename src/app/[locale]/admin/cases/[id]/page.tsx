@@ -97,7 +97,7 @@ export default async function AdminCaseDetailPage({
 
   return (
     <section className="space-y-6">
-      <header className="glass-panel rounded-lg p-5 sm:p-6">
+      <div className="glass-panel rounded-lg p-5 sm:p-6">
         <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
           <BriefcaseBusiness className="size-3.5" aria-hidden />
           {caseRow.case_number}
@@ -120,7 +120,7 @@ export default async function AdminCaseDetailPage({
             </Link>
           </p>
         ) : null}
-      </header>
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Card>

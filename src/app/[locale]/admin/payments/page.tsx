@@ -84,13 +84,13 @@ export default async function AdminPaymentsPage({
 
   return (
     <section className="space-y-8">
-      <header className="glass-panel rounded-lg p-5 sm:p-6">
+      <div className="glass-panel rounded-lg p-5 sm:p-6">
         <p className="brand-kicker">
           <BadgeDollarSign className="size-3.5" aria-hidden />
           Finanzas
         </p>
         <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">Pagos</h1>
-      </header>
+      </div>
 
       {/* Casos esperando plan */}
       <div className="space-y-3">

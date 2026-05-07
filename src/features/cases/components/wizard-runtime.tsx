@@ -126,7 +126,7 @@ export function WizardRuntime({
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="glass-panel space-y-3 rounded-lg p-5">
+      <div className="glass-panel space-y-3 rounded-lg p-5">
         <p className="text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
           {t("Onboarding.stepOf", { step: stepIndex + 1, total: steps.length })}
         </p>
@@ -149,7 +149,7 @@ export function WizardRuntime({
             {locale === "es" ? step.descriptionEs : step.descriptionEn}
           </p>
         )}
-      </header>
+      </div>
 
       <div className="rounded-lg border border-white/70 bg-white/72 p-5 shadow-sm backdrop-blur-xl">
         <div className="flex flex-col gap-4">

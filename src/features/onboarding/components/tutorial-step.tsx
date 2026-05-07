@@ -10,9 +10,9 @@ export function TutorialStep({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <header>
+      <div>
         <h2 className="text-2xl font-semibold tracking-normal">{t("title")}</h2>
-      </header>
+      </div>
       <ol className="space-y-3">
         {steps.map((key, idx) => (
           <li key={key} className="flex items-start gap-3">

@@ -112,6 +112,90 @@
     "body": "We couldn't load this page. When the connection is back, you can continue where you left off. If you were filling out a form, your draft is saved locally.",
     "retry": "Retry"
   },
+  "Legal": {
+    "lastUpdated": "Last updated: May 7, 2026",
+    "backHome": "← Back to home",
+    "terms": {
+      "title": "Terms of Service",
+      "subtitle": "Legal-tech platform under the Utah Legal Regulatory Sandbox Phase 2",
+      "sections": {
+        "intro": {
+          "heading": "1. Acceptance",
+          "body": "By using USA Latino Prime Utah you accept these Terms. If you don't agree, do not use the platform. We operate under the Utah Legal Regulatory Sandbox Phase 2, valid through August 14, 2027."
+        },
+        "notALawFirm": {
+          "heading": "2. We are not a law firm",
+          "body": "This platform is NOT a law firm and does NOT provide legal advice. Some people who own or manage this company are not lawyers; therefore, certain services or protections (like attorney-client privilege) may differ from those of a law firm. If you need legal advice, consult a licensed Utah attorney."
+        },
+        "scope": {
+          "heading": "3. Scope of service",
+          "body": "We help you fill in official Utah State Courts forms and file them in your judicial district. We do NOT handle immigration matters (Utah Supreme Court order, September 16, 2024). We do NOT represent clients in court."
+        },
+        "userResponsibility": {
+          "heading": "4. Your responsibility",
+          "body": "You are responsible for reviewing and verifying the accuracy of all information you provide and every document generated before filing it with the court. Your signature on forms and affidavits is yours alone."
+        },
+        "ai": {
+          "heading": "5. Use of artificial intelligence",
+          "body": "We use Google Gemini to extract data from your documents and autofill forms. AI can make mistakes: you always review the result before printing or signing. Every interaction is logged in an immutable audit trail."
+        },
+        "fees": {
+          "heading": "6. Fees and refunds",
+          "body": "Pricing is shown when you start the case. We accept manual payments (Zelle, bank transfer, cash, etc.) verified by the team. Refund policy: 7 days from contract signing as long as filing has not begun."
+        },
+        "termination": {
+          "heading": "7. Termination",
+          "body": "You may cancel your case at any time before it is completed. We reserve the right to suspend accounts that violate these Terms or sandbox regulations."
+        },
+        "complaints": {
+          "heading": "8. Complaints",
+          "body": "You may file complaints with us (soporte@usalatinoprime.com) and directly with the Utah Office of Legal Services Innovation at https://utahinnovationoffice.org/sandbox-customer-complaint/."
+        },
+        "law": {
+          "heading": "9. Governing law",
+          "body": "These Terms are governed by the laws of the State of Utah, USA. Any dispute will be resolved in Utah courts."
+        }
+      }
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "subtitle": "How we collect, use, and protect your information",
+      "sections": {
+        "intro": {
+          "heading": "1. Overview",
+          "body": "We respect your privacy and comply with the Utah Consumer Privacy Act (UCPA). This policy describes what data we collect, how we use it, and the rights you have over it."
+        },
+        "dataCollected": {
+          "heading": "2. Data we collect",
+          "body": "Email, full name, date of birth, phone, address, official ID (with OCR), case documents (birth certificate, lease, bills, etc.), payment data (method and proof; never card numbers), and answers to official forms."
+        },
+        "dataUse": {
+          "heading": "3. How we use your data",
+          "body": "To create your account, generate contracts, autofill official forms, process manual payments, communicate case status, and meet sandbox phase 2 requirements (audit log, complaint reporting)."
+        },
+        "thirdParties": {
+          "heading": "4. Third parties (DPA)",
+          "body": "We share data with: Supabase (DB hosting + Storage), Google Gemini (AI extraction, us-central1 residency), Resend (transactional email), Dropbox Sign (digital contract signing), and Stripe (when online payments apply). Each provider operates under its own DPA."
+        },
+        "retention": {
+          "heading": "5. Retention",
+          "body": "We keep your data while your account is active plus 7 years after closing your last case (legal audit requirement). Audit log is immutable."
+        },
+        "rights": {
+          "heading": "6. Your UCPA rights",
+          "body": "You may request access, correction, deletion, or portability of your data by writing to privacidad@usalatinoprime.com. We will respond within 45 days."
+        },
+        "security": {
+          "heading": "7. Security",
+          "body": "Row-level security by owner, private Storage with signed URLs (60s), HTTPS required, httpOnly cookies, append-only audit log, least-privilege role access. We report incidents to affected users within 72 hours."
+        },
+        "changes": {
+          "heading": "8. Changes",
+          "body": "We will notify material changes by email and publish the update date at the top of this page."
+        }
+      }
+    }
+  },
   "Footer": {
     "company": "USA Latino Prime LLC",
     "address": "Salt Lake City, Utah",

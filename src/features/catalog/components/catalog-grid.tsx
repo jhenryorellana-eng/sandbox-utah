@@ -23,7 +23,7 @@ export function CatalogGrid({
         const accent = CATEGORY_ACCENT[category.slug] ?? category.color_hex
         return (
           <section key={category.id} aria-labelledby={`cat-${category.slug}`}>
-            <header className="mb-5 flex flex-col gap-2 border-b border-border/70 pb-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="mb-5 flex flex-col gap-2 border-b border-border/70 pb-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <div className="mb-3 flex items-center gap-3">
                   <span
@@ -42,7 +42,7 @@ export function CatalogGrid({
                   {name}
                 </h2>
               </div>
-            </header>
+            </div>
             {description && (
               <p className="mb-5 max-w-2xl text-sm leading-6 text-muted-foreground">
                 {description}

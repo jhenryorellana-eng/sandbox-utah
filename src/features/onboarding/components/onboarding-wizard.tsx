@@ -49,12 +49,12 @@ export function OnboardingWizard({
   return (
     <Card className="w-full max-w-2xl animate-in-up">
       <CardContent className="space-y-6 p-6 sm:p-8">
-        <header className="space-y-2">
+        <div className="space-y-2">
           <p className="text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
             {t("stepOf", { step: idx + 1, total: ONBOARDING_STEPS.length })}
           </p>
           <ProgressBar current={idx + 1} total={ONBOARDING_STEPS.length} />
-        </header>
+        </div>
 
         {step === "personal" && <PersonalInfoStep onSuccess={advance} />}
         {step === "residency" && <ResidencyUploadStep onSuccess={advance} />}

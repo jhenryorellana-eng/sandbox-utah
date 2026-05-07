@@ -44,13 +44,13 @@ function Queue({
   if (items.length === 0) {
     return (
       <section className="space-y-6">
-        <header className="glass-panel rounded-lg p-5 sm:p-6">
+        <div className="glass-panel rounded-lg p-5 sm:p-6">
           <p className="brand-kicker">
             <ShieldCheck className="size-3.5" aria-hidden />
             Identity
           </p>
           <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">{t("title")}</h1>
-        </header>
+        </div>
         <Card>
           <CardContent className="py-8 text-center text-muted-foreground">
             {t("noPending")}
@@ -62,13 +62,13 @@ function Queue({
 
   return (
     <section className="space-y-6">
-      <header className="glass-panel rounded-lg p-5 sm:p-6">
+      <div className="glass-panel rounded-lg p-5 sm:p-6">
         <p className="brand-kicker">
           <ShieldCheck className="size-3.5" aria-hidden />
           {t("queueLabel")}
         </p>
         <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">{t("title")}</h1>
-      </header>
+      </div>
       <div className="space-y-4">
         {items.map((item) => (
           <Card key={item.id} className="lift-card">

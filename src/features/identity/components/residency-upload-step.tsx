@@ -40,10 +40,10 @@ export function ResidencyUploadStep({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <form action={onSubmit} className="flex flex-col gap-4">
-      <header>
+      <div>
         <h2 className="text-2xl font-semibold tracking-normal">{t("title")}</h2>
         <p className="mt-1 text-muted-foreground">{t("subtitle")}</p>
-      </header>
+      </div>
 
       <div className="space-y-2">
         <Label htmlFor="front">{t("uploadFront")}</Label>

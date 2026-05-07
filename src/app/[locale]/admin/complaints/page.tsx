@@ -33,13 +33,13 @@ export default async function AdminComplaintsPage({
 
   return (
     <section className="space-y-6">
-      <header className="glass-panel rounded-lg p-5 sm:p-6">
+      <div className="glass-panel rounded-lg p-5 sm:p-6">
         <p className="brand-kicker">
           <MessageSquareWarning className="size-3.5" aria-hidden />
           Sandbox feedback
         </p>
         <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">Quejas</h1>
-      </header>
+      </div>
       {complaints.length === 0 && (
         <Card>
           <CardContent className="py-6 text-center text-muted-foreground">

@@ -187,7 +187,7 @@ function FilingTabReady({
       />
 
       <section className="space-y-3">
-        <header className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between gap-2">
           <h3 className="text-sm font-semibold">{t("forms.heading")}</h3>
           <PrintPacketButton
             caseId={caseId}
@@ -195,7 +195,7 @@ function FilingTabReady({
             scope="full_packet"
             labelKey="actions.printPacket"
           />
-        </header>
+        </div>
         <FormsList
           forms={packet.forms}
           locale={locale}

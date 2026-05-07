@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useRouter } from "@/lib/i18n/navigation"
+import { Money } from "@/shared/domain/money"
 import { reportPaymentAction } from "../actions/report-payment"
 
 interface InstallmentOption {
@@ -33,14 +34,20 @@ export function ReportPaymentForm({ installments }: { installments: InstallmentO
 
   function onSubmit(formData: FormData) {
     setError(null)
+
+    const dollarsRaw = String(formData.get("amountCents") ?? "")
+    const dollars = Number(dollarsRaw)
+    if (!Number.isFinite(dollars) || dollars <= 0) {
+      setError("Monto inválido. Revisa el campo.")
+      return
+    }
+    formData.set("amountCents", String(Money.fromDollars(dollars).cents))
     formData.set("installmentId", installmentId)
+
     startTransition(async () => {
       const res = await reportPaymentAction(formData)
       if (!res.ok) {
-        if (res.errorCode === "no_proof") setError("Debes subir un comprobante.")
-        else if (res.errorCode === "file_too_large") setError("Comprobante muy grande (máx 10 MB).")
-        else if (res.errorCode === "invalid_type") setError("Tipo de archivo no aceptado.")
-        else setError(res.errorMessage ?? "Error")
+        setError(messageFor(res.errorCode, res.errorMessage))
         return
       }
       router.refresh()
@@ -105,13 +112,9 @@ export function ReportPaymentForm({ installments }: { installments: InstallmentO
           min="0.01"
           required
           defaultValue={selected ? (selected.amountCents / 100).toFixed(2) : ""}
-          onChange={(e) => {
-            const cents = Math.round(Number(e.target.value) * 100)
-            e.target.dataset.cents = String(cents)
-          }}
         />
         <p className="text-xs text-muted-foreground">
-          Indica el monto exacto que pagaste. Si pagaste en centavos, usa decimales.
+          Indica el monto exacto que pagaste. Si pagaste con centavos, usa decimales.
         </p>
       </div>
 
@@ -140,23 +143,6 @@ export function ReportPaymentForm({ installments }: { installments: InstallmentO
         </p>
       </div>
 
-      {/* Hack: convertimos el monto USD a cents en el client antes del submit */}
-      <input
-        type="hidden"
-        name="amountCentsHidden"
-        ref={(el) => {
-          if (!el) return
-          el.form?.addEventListener(
-            "submit",
-            (e) => {
-              const dollars = Number((e.target as HTMLFormElement).amountCents.value)
-              ;(e.target as HTMLFormElement).amountCents.value = String(Math.round(dollars * 100))
-            },
-            { once: true },
-          )
-        }}
-      />
-
       {error && (
         <p role="alert" className="text-sm text-destructive">
           {error}
@@ -168,4 +154,25 @@ export function ReportPaymentForm({ installments }: { installments: InstallmentO
       </Button>
     </form>
   )
+}
+
+function messageFor(code: string | undefined, raw: string | undefined): string {
+  switch (code) {
+    case "no_proof":
+      return "Debes subir un comprobante."
+    case "file_too_large":
+      return "Comprobante muy grande (máx 10 MB)."
+    case "invalid_type":
+      return "Tipo de archivo no aceptado. Usa PDF, JPG, PNG o WebP."
+    case "installment_already_reported":
+      return "Esta cuota ya fue reportada. Espera la verificación del admin."
+    case "installment_not_found":
+      return "Cuota no encontrada. Recarga la página."
+    case "validation":
+      return "Datos inválidos. Revisa los campos."
+    case "auth":
+      return "Sesión expirada. Vuelve a iniciar sesión."
+    default:
+      return raw ?? "Error al reportar el pago. Inténtalo de nuevo."
+  }
 }
