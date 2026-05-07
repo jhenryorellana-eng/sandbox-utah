@@ -1,3 +1,4 @@
+import { MessageSquareWarning } from "lucide-react"
 import { setRequestLocale } from "next-intl/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ComplaintRowActions } from "@/features/admin/components/complaint-row-actions"
@@ -32,7 +33,13 @@ export default async function AdminComplaintsPage({
 
   return (
     <section className="space-y-6">
-      <h1 className="text-3xl font-semibold tracking-tight">Quejas</h1>
+      <header className="glass-panel rounded-lg p-5 sm:p-6">
+        <p className="brand-kicker">
+          <MessageSquareWarning className="size-3.5" aria-hidden />
+          Sandbox feedback
+        </p>
+        <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">Quejas</h1>
+      </header>
       {complaints.length === 0 && (
         <Card>
           <CardContent className="py-6 text-center text-muted-foreground">
@@ -42,7 +49,7 @@ export default async function AdminComplaintsPage({
       )}
       <div className="space-y-3">
         {complaints.map((c) => (
-          <Card key={c.id}>
+          <Card key={c.id} className="lift-card">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base">

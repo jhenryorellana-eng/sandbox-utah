@@ -126,8 +126,8 @@ export function WizardRuntime({
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="space-y-2">
-        <p className="text-xs uppercase tracking-wider text-muted-foreground">
+      <header className="glass-panel space-y-3 rounded-lg p-5">
+        <p className="text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
           {t("Onboarding.stepOf", { step: stepIndex + 1, total: steps.length })}
         </p>
         <div
@@ -136,11 +136,14 @@ export function WizardRuntime({
           aria-valuemin={0}
           aria-valuemax={100}
           aria-label="Wizard progress"
-          className="h-1.5 w-full overflow-hidden rounded-full bg-secondary"
+          className="h-2 w-full overflow-hidden rounded-full bg-secondary shadow-inner"
         >
-          <div className="h-full bg-primary transition-all" style={{ width: `${progress}%` }} />
+          <div
+            className="h-full bg-primary transition-all duration-500"
+            style={{ width: `${progress}%` }}
+          />
         </div>
-        <h2 className="text-2xl font-semibold tracking-tight">{stepTitle}</h2>
+        <h2 className="text-2xl font-black tracking-normal">{stepTitle}</h2>
         {step.descriptionEs && (
           <p className="text-muted-foreground">
             {locale === "es" ? step.descriptionEs : step.descriptionEn}
@@ -148,17 +151,19 @@ export function WizardRuntime({
         )}
       </header>
 
-      <div className="flex flex-col gap-4">
-        {step.fields.map((field) => (
-          <FieldRenderer
-            key={field.id}
-            field={field}
-            locale={locale}
-            value={data[field.id]}
-            error={fieldErrors[field.id]}
-            onChange={(v) => setField(field.id, v)}
-          />
-        ))}
+      <div className="rounded-lg border border-white/70 bg-white/72 p-5 shadow-sm backdrop-blur-xl">
+        <div className="flex flex-col gap-4">
+          {step.fields.map((field) => (
+            <FieldRenderer
+              key={field.id}
+              field={field}
+              locale={locale}
+              value={data[field.id]}
+              error={fieldErrors[field.id]}
+              onChange={(v) => setField(field.id, v)}
+            />
+          ))}
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -237,7 +242,7 @@ function FieldRenderer({
           id={field.id}
           value={(value as string | undefined) ?? ""}
           onChange={(e) => onChange(e.target.value)}
-          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+          className="flex h-11 w-full rounded-lg border border-input bg-white/76 px-3.5 py-2 text-sm font-semibold shadow-sm backdrop-blur-xl"
         >
           <option value="">--</option>
           {field.options.map((opt) => (
@@ -261,7 +266,7 @@ function FieldRenderer({
           rows={4}
           value={(value as string | undefined) ?? ""}
           onChange={(e) => onChange(e.target.value)}
-          className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+          className="flex w-full rounded-lg border border-input bg-white/76 px-3.5 py-2 text-sm font-semibold shadow-sm backdrop-blur-xl"
         />
         {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
         {error && <p className="text-xs text-destructive">{error}</p>}

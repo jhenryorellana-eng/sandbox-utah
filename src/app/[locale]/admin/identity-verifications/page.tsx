@@ -1,3 +1,4 @@
+import { ShieldCheck } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -43,7 +44,13 @@ function Queue({
   if (items.length === 0) {
     return (
       <section className="space-y-6">
-        <h1 className="text-3xl font-semibold tracking-tight">{t("title")}</h1>
+        <header className="glass-panel rounded-lg p-5 sm:p-6">
+          <p className="brand-kicker">
+            <ShieldCheck className="size-3.5" aria-hidden />
+            Identity
+          </p>
+          <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">{t("title")}</h1>
+        </header>
         <Card>
           <CardContent className="py-8 text-center text-muted-foreground">
             {t("noPending")}
@@ -55,11 +62,16 @@ function Queue({
 
   return (
     <section className="space-y-6">
-      <h1 className="text-3xl font-semibold tracking-tight">{t("title")}</h1>
-      <p className="text-sm text-muted-foreground">{t("queueLabel")}</p>
+      <header className="glass-panel rounded-lg p-5 sm:p-6">
+        <p className="brand-kicker">
+          <ShieldCheck className="size-3.5" aria-hidden />
+          {t("queueLabel")}
+        </p>
+        <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">{t("title")}</h1>
+      </header>
       <div className="space-y-4">
         {items.map((item) => (
-          <Card key={item.id}>
+          <Card key={item.id} className="lift-card">
             <CardHeader>
               <CardTitle className="text-base">
                 {item.profile.full_name ?? item.profile.email}

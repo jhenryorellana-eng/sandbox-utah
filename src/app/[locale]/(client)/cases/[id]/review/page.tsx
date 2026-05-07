@@ -32,20 +32,18 @@ export default async function CaseReviewPage({
   const formData = (caseRow.form_data ?? {}) as Record<string, unknown>
 
   return (
-    <section className="mx-auto w-full max-w-2xl flex-1 px-4 py-10">
-      <p className="text-xs uppercase tracking-wider text-muted-foreground">
-        {caseRow.case_number}
-      </p>
-      <h1 className="mt-1 text-2xl font-semibold tracking-tight">
+    <section className="page-shell max-w-3xl flex-1">
+      <p className="brand-kicker">{caseRow.case_number}</p>
+      <h1 className="mt-5 text-3xl font-black leading-tight tracking-normal">
         Revisión: {caseRow.display_name}
       </h1>
-      <p className="text-muted-foreground">
+      <p className="mt-2 text-muted-foreground">
         Verifica que todos los datos sean correctos antes de enviar a revisión QA.
       </p>
 
       <div className="mt-6 space-y-4">
         {workflow.steps.map((step) => (
-          <Card key={step.id}>
+          <Card key={step.id} className="lift-card">
             <CardHeader>
               <CardTitle className="text-base">
                 {locale === "es" ? step.titleEs : step.titleEn}
@@ -57,7 +55,7 @@ export default async function CaseReviewPage({
                   const value = formData[field.id]
                   return (
                     <div key={field.id} className="space-y-0.5">
-                      <dt className="text-xs uppercase tracking-wide text-muted-foreground">
+                      <dt className="text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
                         {locale === "es" ? field.labelEs : field.labelEn}
                       </dt>
                       <dd className="font-medium">

@@ -1,3 +1,4 @@
+import { ArrowRight, CheckCircle2, Clock3, XCircle } from "lucide-react"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getTranslations, setRequestLocale } from "next-intl/server"
@@ -46,58 +47,76 @@ export default async function ServiceDetailPage({
   const duration = service.estimated_duration_minutes
 
   return (
-    <section className="mx-auto w-full max-w-3xl flex-1 px-4 py-12">
-      <p className="mb-2 text-sm font-medium uppercase tracking-wide text-muted-foreground">
-        {locale === "es" ? category.name_es : category.name_en}
+    <section className="page-shell max-w-4xl flex-1">
+      <p className="brand-kicker">{locale === "es" ? category.name_es : category.name_en}</p>
+      <h1 className="mt-5 text-balance text-4xl font-black leading-tight tracking-normal sm:text-5xl">
+        {name}
+      </h1>
+      <p className="mt-4 max-w-3xl text-xl font-extrabold leading-snug text-foreground">
+        {shortDesc}
       </p>
-      <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{name}</h1>
-      <p className="mt-3 text-lg text-muted-foreground">{shortDesc}</p>
-      {longDesc && <p className="mt-2 leading-relaxed">{longDesc}</p>}
+      {longDesc && <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">{longDesc}</p>}
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <Card>
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <Card className="lift-card">
           <CardHeader>
-            <CardTitle className="text-base">{t("whatIncludes")}</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <CheckCircle2 className="size-5 text-emerald-600" aria-hidden />
+              {t("whatIncludes")}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <ul className="list-disc space-y-1 pl-4 text-sm">
+            <ul className="space-y-2 text-sm leading-6">
               {includes.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} className="flex gap-2">
+                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-emerald-500" />
+                  <span>{item}</span>
+                </li>
               ))}
             </ul>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="lift-card">
           <CardHeader>
-            <CardTitle className="text-base">{t("whatDoesNotInclude")}</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <XCircle className="size-5 text-accent" aria-hidden />
+              {t("whatDoesNotInclude")}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <ul className="list-disc space-y-1 pl-4 text-sm">
+            <ul className="space-y-2 text-sm leading-6">
               {excludes.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} className="flex gap-2">
+                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-accent" />
+                  <span>{item}</span>
+                </li>
               ))}
             </ul>
           </CardContent>
         </Card>
       </div>
 
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-border bg-secondary/30 p-4">
+      <div className="glass-panel mt-8 flex flex-wrap items-center justify-between gap-5 rounded-lg p-5">
         <div className="flex items-baseline gap-3">
-          <span className="text-2xl font-semibold">{price}</span>
+          <span className="text-3xl font-black text-primary">{price}</span>
           {duration && (
-            <span className="text-sm text-muted-foreground">
-              · {duration} {t("minutes")}
+            <span className="inline-flex items-center gap-1.5 text-sm font-extrabold text-muted-foreground">
+              <Clock3 className="size-4" aria-hidden />
+              {duration} {t("minutes")}
             </span>
           )}
         </div>
         <Button asChild>
           <Link href={`/cases/new?service=${service.slug}`} className="inline-flex">
             {t("startCase")}
+            <ArrowRight className="size-4" aria-hidden />
           </Link>
         </Button>
       </div>
 
-      <p className="mt-6 text-xs italic text-muted-foreground">{t("disclaimerInline")}</p>
+      <p className="mt-6 border-l-2 border-accent/60 pl-3 text-xs font-semibold leading-6 text-muted-foreground">
+        {t("disclaimerInline")}
+      </p>
     </section>
   )
 }

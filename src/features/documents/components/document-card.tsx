@@ -41,10 +41,10 @@ export function DocumentCard({
   if (slotKind === "single") {
     const current = documents[0]
     return (
-      <div className="rounded-md border border-border bg-card p-3">
+      <div className="lift-card rounded-lg border border-white/70 bg-white/78 p-4 shadow-sm backdrop-blur-xl">
         <header className="mb-2 flex flex-wrap items-start justify-between gap-2">
           <div className="min-w-0">
-            <h4 className="text-sm font-semibold">
+            <h4 className="text-sm font-black">
               {name}
               {titleSuffix}
               {documentType.is_required_default ? (
@@ -54,7 +54,7 @@ export function DocumentCard({
               ) : null}
             </h4>
             {description ? (
-              <p className="mt-0.5 text-xs text-muted-foreground">{description}</p>
+              <p className="mt-1 text-xs leading-5 text-muted-foreground">{description}</p>
             ) : null}
           </div>
           {!current ? (
@@ -89,10 +89,10 @@ export function DocumentCard({
 
   // multiple_named o dual_es_en (este último simplificado a múltiple por ahora)
   return (
-    <div className="rounded-md border border-border bg-card p-3">
+    <div className="lift-card rounded-lg border border-white/70 bg-white/78 p-4 shadow-sm backdrop-blur-xl">
       <header className="mb-2 flex flex-wrap items-start justify-between gap-2">
         <div className="min-w-0">
-          <h4 className="text-sm font-semibold">
+          <h4 className="text-sm font-black">
             {name}
             {titleSuffix}
             {documentType.is_required_default ? (
@@ -102,7 +102,7 @@ export function DocumentCard({
             ) : null}
           </h4>
           {description ? (
-            <p className="mt-0.5 text-xs text-muted-foreground">{description}</p>
+            <p className="mt-1 text-xs leading-5 text-muted-foreground">{description}</p>
           ) : null}
         </div>
         <FileUploadButton

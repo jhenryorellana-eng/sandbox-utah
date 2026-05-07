@@ -29,7 +29,7 @@ export function ResidencyUploadStep({ onSuccess }: { onSuccess: () => void }) {
   if (submitted) {
     return (
       <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold tracking-tight">{t("submittedTitle")}</h2>
+        <h2 className="text-2xl font-semibold tracking-normal">{t("submittedTitle")}</h2>
         <p className="text-muted-foreground">{t("submittedBody")}</p>
         <Button type="button" onClick={onSuccess} className="self-start">
           OK
@@ -41,7 +41,7 @@ export function ResidencyUploadStep({ onSuccess }: { onSuccess: () => void }) {
   return (
     <form action={onSubmit} className="flex flex-col gap-4">
       <header>
-        <h2 className="text-2xl font-semibold tracking-tight">{t("title")}</h2>
+        <h2 className="text-2xl font-semibold tracking-normal">{t("title")}</h2>
         <p className="mt-1 text-muted-foreground">{t("subtitle")}</p>
       </header>
 

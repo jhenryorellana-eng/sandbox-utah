@@ -1,3 +1,4 @@
+import { BookOpen } from "lucide-react"
 import { setRequestLocale } from "next-intl/server"
 import { CatalogEditor } from "@/features/catalog/components/catalog-editor"
 import { fetchAdminCatalog } from "@/features/catalog/repository"
@@ -14,11 +15,17 @@ export default async function AdminCatalogPage({
 
   return (
     <section className="space-y-6">
-      <header>
-        <h1 className="text-3xl font-semibold tracking-tight">Catálogo de servicios</h1>
-        <p className="text-sm text-muted-foreground">
-          Edita servicios, precios base y tiers (precio por número de beneficiarios). Cada cambio
-          queda registrado en el audit log.
+      <header className="glass-panel rounded-lg p-5 sm:p-6">
+        <p className="brand-kicker">
+          <BookOpen className="size-3.5" aria-hidden />
+          Servicios
+        </p>
+        <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">
+          Catalogo de servicios
+        </h1>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+          Edita servicios, precios base y tiers por numero de beneficiarios. Cada cambio queda
+          registrado en el audit log.
         </p>
       </header>
       <CatalogEditor catalog={catalog} />

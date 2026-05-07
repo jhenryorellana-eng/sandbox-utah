@@ -29,16 +29,14 @@ export default async function CaseFinalizePage({
   }
 
   return (
-    <section className="mx-auto w-full max-w-2xl flex-1 px-4 py-10">
-      <p className="text-xs uppercase tracking-wider text-muted-foreground">
-        {caseRow.case_number}
-      </p>
-      <h1 className="mt-1 text-3xl font-semibold tracking-tight">
+    <section className="page-shell max-w-3xl flex-1">
+      <p className="brand-kicker">{caseRow.case_number}</p>
+      <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">
         Caso finalizado: {caseRow.display_name}
       </h1>
 
       <div className="mt-6 space-y-4">
-        <Card>
+        <Card className="lift-card">
           <CardHeader>
             <CardTitle className="text-base">Próximos pasos: presenta tu PDF</CardTitle>
           </CardHeader>
@@ -74,7 +72,7 @@ export default async function CaseFinalizePage({
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="lift-card">
           <CardHeader>
             <CardTitle className="text-base">¿Necesitas asesoría legal?</CardTitle>
           </CardHeader>

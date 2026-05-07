@@ -1,5 +1,6 @@
 "use client"
 
+import { ArrowRight, BadgeCheck } from "lucide-react"
 import { useEffect, useMemo, useState, useTransition } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -103,11 +104,11 @@ export function NewCaseForm({ service, tiers, locale }: NewCaseFormProps) {
         e.preventDefault()
         onSubmit()
       }}
-      className="flex flex-col gap-5"
+      className="flex flex-col gap-6"
     >
       {service.allowsMultipleBeneficiaries ? (
         <section className="space-y-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          <h2 className="text-sm font-black uppercase tracking-[0.12em] text-muted-foreground">
             1. Selecciona el plan
           </h2>
           <ServiceTierSelector
@@ -121,10 +122,10 @@ export function NewCaseForm({ service, tiers, locale }: NewCaseFormProps) {
 
       {selectedTier ? (
         <section className="space-y-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          <h2 className="text-sm font-black uppercase tracking-[0.12em] text-muted-foreground">
             2. {service.beneficiaryLabel ?? "Beneficiarios"} en este caso
           </h2>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs leading-5 text-muted-foreground">
             Estos nombres quedarán registrados en tu contrato y se autorrellenarán en los
             formularios oficiales del distrito judicial.
           </p>
@@ -144,7 +145,7 @@ export function NewCaseForm({ service, tiers, locale }: NewCaseFormProps) {
       ) : null}
 
       <section className="space-y-3">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+        <h2 className="text-sm font-black uppercase tracking-[0.12em] text-muted-foreground">
           {service.allowsMultipleBeneficiaries ? "3. " : ""}Identificación del caso
         </h2>
         <div className="space-y-1">
@@ -156,7 +157,7 @@ export function NewCaseForm({ service, tiers, locale }: NewCaseFormProps) {
             required
             minLength={2}
           />
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs leading-5 text-muted-foreground">
             Personalízalo si manejarás varios casos del mismo servicio (ej. "Custodia — sobrina
             María").
           </p>
@@ -181,13 +182,17 @@ export function NewCaseForm({ service, tiers, locale }: NewCaseFormProps) {
         </p>
       ) : null}
 
-      <div className="flex items-center justify-between rounded-md border border-border bg-muted/40 p-3">
-        <span className="text-sm text-muted-foreground">Total acordado</span>
-        <span className="text-2xl font-bold text-primary">{priceLabel}</span>
+      <div className="glass-panel flex items-center justify-between rounded-lg p-4">
+        <span className="inline-flex items-center gap-2 text-sm font-black text-muted-foreground">
+          <BadgeCheck className="size-4 text-primary" aria-hidden />
+          Total acordado
+        </span>
+        <span className="text-2xl font-black text-primary">{priceLabel}</span>
       </div>
 
       <Button type="submit" disabled={pending}>
         {pending ? "Procesando..." : "Continuar al contrato"}
+        <ArrowRight className="size-4" aria-hidden />
       </Button>
     </form>
   )

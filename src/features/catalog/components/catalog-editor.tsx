@@ -50,12 +50,12 @@ export function CatalogEditor({ catalog }: CatalogEditorProps) {
       ) : null}
 
       {catalog.map((category) => (
-        <Card key={category.id}>
+        <Card key={category.id} className="lift-card">
           <CardContent className="space-y-4 py-5">
             <header className="flex flex-wrap items-end justify-between gap-3">
               <div>
-                <h2 className="text-lg font-semibold">{category.name_es}</h2>
-                <p className="text-xs text-muted-foreground">
+                <h2 className="text-lg font-black">{category.name_es}</h2>
+                <p className="text-xs font-bold text-muted-foreground">
                   {category.services.length} servicio(s) ·{" "}
                   {category.is_active ? "activa" : "inactiva"}
                 </p>
@@ -135,10 +135,10 @@ function ServiceRow({
   })()
 
   return (
-    <div className="rounded-md border border-border p-3">
+    <div className="rounded-lg border border-white/70 bg-white/68 p-4 shadow-sm backdrop-blur-xl">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <h3 className="text-base font-medium">
+          <h3 className="text-base font-black">
             {service.name_es}{" "}
             <span className="font-mono text-xs text-muted-foreground">/{service.slug}</span>
           </h3>
@@ -161,9 +161,9 @@ function ServiceRow({
       </div>
 
       {service.allows_multiple_beneficiaries ? (
-        <div className="mt-3 rounded-md border border-dashed border-border bg-muted/40 p-3">
+        <div className="mt-3 overflow-x-auto rounded-lg border border-dashed border-border bg-white/60 p-3 backdrop-blur-xl">
           <div className="mb-2 flex items-center justify-between">
-            <h4 className="text-sm font-semibold">Tiers (precios por # beneficiarios)</h4>
+            <h4 className="text-sm font-black">Tiers (precios por # beneficiarios)</h4>
             {!newTierEditing ? (
               <Button size="sm" variant="outline" onClick={onStartNewTier}>
                 + Agregar tier

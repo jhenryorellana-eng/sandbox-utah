@@ -6,6 +6,7 @@
   },
   "Nav": {
     "home": "Home",
+    "services": "Services",
     "login": "Sign in",
     "register": "Sign up",
     "dashboard": "My cases",

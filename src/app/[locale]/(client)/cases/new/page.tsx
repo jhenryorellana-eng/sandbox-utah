@@ -1,3 +1,4 @@
+import { FilePlus2 } from "lucide-react"
 import { notFound, redirect } from "next/navigation"
 import { setRequestLocale } from "next-intl/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -34,11 +35,14 @@ export default async function NewCasePage({
     locale === "es" ? result.service.beneficiary_label_es : result.service.beneficiary_label_en
 
   return (
-    <section className="mx-auto w-full max-w-2xl flex-1 px-4 py-12">
-      <Card>
-        <CardHeader>
-          <CardTitle>Iniciar: {name}</CardTitle>
-          <p className="text-sm text-muted-foreground">
+    <section className="page-shell max-w-3xl flex-1">
+      <Card className="animate-in-up">
+        <CardHeader className="space-y-4">
+          <span className="grid size-11 place-items-center rounded-lg bg-primary text-primary-foreground">
+            <FilePlus2 className="size-5" aria-hidden />
+          </span>
+          <CardTitle className="text-2xl">Iniciar: {name}</CardTitle>
+          <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
             Yo elijo iniciar este servicio. Confirmo que la decisión es mía.
           </p>
         </CardHeader>

@@ -1,3 +1,4 @@
+import { Clock3, LogOut, Plus, ShieldCheck } from "lucide-react"
 import { redirect } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
@@ -76,54 +77,95 @@ function Dashboard({
   const archivedCases = cases.filter(
     (c) => c.intake_status === "archived" || c.intake_status === "cancelled",
   )
+  const canStartCase = onboardingComplete && residencyApproved
 
   return (
-    <section className="mx-auto w-full max-w-screen-xl flex-1 px-4 py-12">
-      <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-3xl font-semibold tracking-tight">
-          {t("welcome", { name: displayName || "👋" })}
-        </h1>
-        <form action={signOutAction}>
-          <input type="hidden" name="locale" value={locale} />
-          <Button variant="outline" type="submit">
-            {tNav("logout")}
-          </Button>
-        </form>
+    <section className="page-shell flex-1">
+      <header className="glass-panel mb-8 rounded-lg p-5 sm:p-6">
+        <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p className="brand-kicker">
+              <ShieldCheck className="size-3.5" aria-hidden />
+              {residencyApproved
+                ? locale === "es"
+                  ? "Residencia verificada"
+                  : "Residency verified"
+                : locale === "es"
+                  ? "Verificacion pendiente"
+                  : "Verification pending"}
+            </p>
+            <h1 className="mt-5 text-balance text-4xl font-black leading-tight tracking-normal sm:text-5xl">
+              {t("welcome", { name: displayName || (locale === "es" ? "Cliente" : "Client") })}
+            </h1>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
+              {locale === "es"
+                ? "Tu espacio para seguir casos, documentos, pagos y formularios oficiales."
+                : "Your workspace for cases, documents, payments, and official forms."}
+            </p>
+          </div>
+          <form action={signOutAction}>
+            <input type="hidden" name="locale" value={locale} />
+            <Button variant="outline" type="submit">
+              <LogOut className="size-4" aria-hidden />
+              {tNav("logout")}
+            </Button>
+          </form>
+        </div>
+      </header>
+
+      <div className="mb-6 grid gap-4 sm:grid-cols-3">
+        <StatusTile
+          label={locale === "es" ? "Casos activos" : "Active cases"}
+          value={activeCases.length.toString()}
+        />
+        <StatusTile
+          label={locale === "es" ? "Archivados" : "Archived"}
+          value={archivedCases.length.toString()}
+        />
+        <StatusTile
+          label={locale === "es" ? "Estado" : "Status"}
+          value={residencyApproved ? (locale === "es" ? "Listo" : "Ready") : "Hold"}
+        />
       </div>
 
       {!onboardingComplete && (
-        <Card className="mb-6 border-primary/40 bg-primary/5">
+        <Card className="mb-6 lift-card">
           <CardHeader>
-            <CardTitle>Completa tu perfil</CardTitle>
+            <CardTitle>
+              {locale === "es" ? "Completa tu perfil" : "Complete your profile"}
+            </CardTitle>
             <CardDescription>
-              Necesitamos algunos datos antes de que puedas iniciar un caso.
+              {locale === "es"
+                ? "Necesitamos tus datos basicos antes de iniciar un caso."
+                : "We need your basic information before you start a case."}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild>
-              <Link href="/onboarding">Continuar onboarding</Link>
+              <Link href="/onboarding">{locale === "es" ? "Continuar" : "Continue"}</Link>
             </Button>
           </CardContent>
         </Card>
       )}
 
       {verificationStatus && (
-        <Card className="mb-6">
+        <Card className="mb-6 lift-card">
           <CardHeader>
-            <CardTitle className="text-base">{tIdentity("statusLabel")}</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <ShieldCheck className="size-5 text-primary" aria-hidden />
+              {tIdentity("statusLabel")}
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
-            <p>
-              <span
-                className={`inline-block rounded-full px-2 py-0.5 text-xs ${
-                  residencyApproved
-                    ? "bg-emerald-100 text-emerald-900"
-                    : "bg-amber-100 text-amber-900"
-                }`}
-              >
-                {tIdentity(`statuses.${verificationStatus as "submitted"}`)}
-              </span>
-            </p>
+            <span
+              className={`inline-flex rounded-full px-3 py-1 text-xs font-black ${
+                residencyApproved
+                  ? "bg-emerald-100 text-emerald-900"
+                  : "bg-amber-100 text-amber-900"
+              }`}
+            >
+              {tIdentity(`statuses.${verificationStatus as "submitted"}`)}
+            </span>
             {verificationStatus === "rejected" && rejectionReason && (
               <p className="text-destructive">
                 {tIdentity("rejectedNotice", { reason: rejectionReason })}
@@ -133,45 +175,55 @@ function Dashboard({
         </Card>
       )}
 
-      <div className="space-y-3">
+      <div className="space-y-4">
         <header className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h2 className="text-xl font-semibold">
+            <h2 className="text-2xl font-black tracking-normal">
               {locale === "es" ? "Mis casos activos" : "My active cases"}
             </h2>
-            <p className="text-sm text-muted-foreground">
+            <p className="mt-1 text-sm text-muted-foreground">
               {activeCases.length === 0
                 ? locale === "es"
-                  ? "Aún no tienes casos. Inicia uno para comenzar."
+                  ? "Aun no tienes casos. Inicia uno para comenzar."
                   : "No active cases yet. Start one to begin."
                 : locale === "es"
                   ? `${activeCases.length} caso(s) en curso.`
                   : `${activeCases.length} case(s) in progress.`}
             </p>
           </div>
-          <Button asChild disabled={!onboardingComplete || !residencyApproved}>
-            <Link href="/services">
-              {locale === "es" ? "+ Iniciar nuevo caso" : "+ Start new case"}
-            </Link>
-          </Button>
+          {canStartCase ? (
+            <Button asChild>
+              <Link href="/services">
+                <Plus className="size-4" aria-hidden />
+                {locale === "es" ? "Iniciar nuevo caso" : "Start new case"}
+              </Link>
+            </Button>
+          ) : (
+            <Button disabled>
+              <Clock3 className="size-4" aria-hidden />
+              {locale === "es" ? "Verificacion requerida" : "Verification required"}
+            </Button>
+          )}
         </header>
 
         {activeCases.length === 0 ? (
-          <Card>
+          <Card className="lift-card">
             <CardHeader>
               <CardTitle>{t("emptyState")}</CardTitle>
               <CardDescription>
-                Explora los servicios disponibles para empezar tu primer trámite.
+                {locale === "es"
+                  ? "Explora los servicios disponibles para empezar tu primer tramite."
+                  : "Explore the available services to start your first filing."}
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex gap-2">
+            <CardContent>
               <Button asChild>
-                <Link href="/services">Ver servicios</Link>
+                <Link href="/services">{locale === "es" ? "Ver servicios" : "View services"}</Link>
               </Button>
             </CardContent>
           </Card>
         ) : (
-          <div className="grid gap-3 md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2">
             {activeCases.map((c) => (
               <CaseListCard key={c.id} caseRow={c} locale={locale} />
             ))}
@@ -180,12 +232,12 @@ function Dashboard({
       </div>
 
       {archivedCases.length > 0 ? (
-        <details className="mt-8">
-          <summary className="cursor-pointer text-sm font-medium text-muted-foreground">
+        <details className="mt-8 rounded-lg border border-white/70 bg-white/70 p-4 backdrop-blur-xl">
+          <summary className="cursor-pointer text-sm font-black text-muted-foreground">
             {locale === "es" ? "Casos archivados/cancelados" : "Archived/cancelled cases"} (
             {archivedCases.length})
           </summary>
-          <div className="mt-3 grid gap-3 md:grid-cols-2">
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
             {archivedCases.map((c) => (
               <CaseListCard key={c.id} caseRow={c} locale={locale} />
             ))}
@@ -193,5 +245,16 @@ function Dashboard({
         </details>
       ) : null}
     </section>
+  )
+}
+
+function StatusTile({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-lg border border-white/70 bg-white/72 p-4 shadow-sm backdrop-blur-xl">
+      <p className="text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
+        {label}
+      </p>
+      <p className="mt-2 text-2xl font-black text-foreground">{value}</p>
+    </div>
   )
 }

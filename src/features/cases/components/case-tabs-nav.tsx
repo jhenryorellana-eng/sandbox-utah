@@ -32,8 +32,11 @@ export function CaseTabsNav({ caseId, current, locale }: CaseTabsNavProps) {
   const pathname = usePathname()
 
   return (
-    <nav aria-label="Secciones del caso" className="border-b border-border">
-      <ul className="flex flex-wrap gap-1 overflow-x-auto">
+    <nav
+      aria-label="Secciones del caso"
+      className="rounded-lg border border-white/70 bg-white/70 p-1 shadow-sm backdrop-blur-xl"
+    >
+      <ul className="flex gap-1 overflow-x-auto">
         {TAB_ORDER.map((tab) => {
           const href = PATH_BY_TAB[tab](caseId)
           const isActive = current === tab || pathname.endsWith(href)
@@ -43,10 +46,10 @@ export function CaseTabsNav({ caseId, current, locale }: CaseTabsNavProps) {
                 href={href as never}
                 aria-current={isActive ? "page" : undefined}
                 className={
-                  "inline-flex items-center px-3 py-2 text-sm font-medium transition-colors " +
+                  "inline-flex min-w-max items-center rounded-md px-3 py-2 text-sm font-extrabold transition-all " +
                   (isActive
-                    ? "border-b-2 border-primary text-foreground"
-                    : "border-b-2 border-transparent text-muted-foreground hover:text-foreground")
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "text-muted-foreground hover:bg-white/80 hover:text-foreground")
                 }
               >
                 {LABELS[tab][locale]}

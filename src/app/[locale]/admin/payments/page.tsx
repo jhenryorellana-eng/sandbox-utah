@@ -1,3 +1,4 @@
+import { BadgeDollarSign } from "lucide-react"
 import { setRequestLocale } from "next-intl/server"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -83,11 +84,17 @@ export default async function AdminPaymentsPage({
 
   return (
     <section className="space-y-8">
-      <h1 className="text-3xl font-semibold tracking-tight">Pagos</h1>
+      <header className="glass-panel rounded-lg p-5 sm:p-6">
+        <p className="brand-kicker">
+          <BadgeDollarSign className="size-3.5" aria-hidden />
+          Finanzas
+        </p>
+        <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">Pagos</h1>
+      </header>
 
       {/* Casos esperando plan */}
       <div className="space-y-3">
-        <h2 className="text-xl font-semibold">Casos esperando plan de pagos</h2>
+        <h2 className="text-xl font-black">Casos esperando plan de pagos</h2>
         {awaitingPlan.length === 0 && (
           <Card>
             <CardContent className="py-4 text-sm text-muted-foreground">
@@ -96,7 +103,7 @@ export default async function AdminPaymentsPage({
           </Card>
         )}
         {awaitingPlan.map((c) => (
-          <Card key={c.id}>
+          <Card key={c.id} className="lift-card">
             <CardHeader>
               <CardTitle className="text-base">{c.display_name}</CardTitle>
               <CardDescription>
@@ -122,7 +129,7 @@ export default async function AdminPaymentsPage({
 
       {/* Pagos por verificar */}
       <div className="space-y-3">
-        <h2 className="text-xl font-semibold">Pagos por verificar</h2>
+        <h2 className="text-xl font-black">Pagos por verificar</h2>
         {enriched.length === 0 && (
           <Card>
             <CardContent className="py-4 text-sm text-muted-foreground">
@@ -132,7 +139,7 @@ export default async function AdminPaymentsPage({
         )}
         <div className="space-y-4">
           {enriched.map((p) => (
-            <Card key={p.id}>
+            <Card key={p.id} className="lift-card">
               <CardHeader>
                 <CardTitle className="text-base">{p.client.full_name ?? p.client.email}</CardTitle>
                 <p className="text-xs text-muted-foreground">{p.client.email}</p>

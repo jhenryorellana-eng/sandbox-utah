@@ -11,7 +11,7 @@ export function ComplaintBanner() {
   return (
     <aside
       aria-label="Sandbox compliance notice"
-      className="border-b border-border bg-secondary/60 px-4 py-2 text-xs leading-relaxed text-secondary-foreground"
+      className="border-b border-primary/10 bg-primary px-4 py-2 text-xs font-semibold leading-relaxed text-primary-foreground shadow-[0_8px_24px_oklch(0.31_0.101_257_/_14%)]"
     >
       <p className="mx-auto max-w-screen-xl">{t("complaintBanner")}</p>
     </aside>

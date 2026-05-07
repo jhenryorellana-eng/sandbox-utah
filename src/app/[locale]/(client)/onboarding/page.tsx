@@ -1,3 +1,4 @@
+import { ShieldCheck } from "lucide-react"
 import { redirect } from "next/navigation"
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server"
 import { OnboardingWizard } from "@/features/onboarding/components/onboarding-wizard"
@@ -38,8 +39,14 @@ export default async function OnboardingPage({ params }: { params: Promise<{ loc
   }
 
   return (
-    <section className="mx-auto flex w-full max-w-3xl flex-1 flex-col items-center px-4 py-10">
-      <h1 className="mb-6 text-3xl font-semibold tracking-tight">{t("title")}</h1>
+    <section className="page-shell flex max-w-3xl flex-1 flex-col items-center">
+      <p className="brand-kicker mb-5">
+        <ShieldCheck className="size-3.5" aria-hidden />
+        Utah onboarding
+      </p>
+      <h1 className="mb-7 text-center text-4xl font-black leading-tight tracking-normal sm:text-5xl">
+        {t("title")}
+      </h1>
       <OnboardingWizard
         locale={locale}
         consentTexts={messages.Consents.items}

@@ -1,3 +1,4 @@
+import { ArrowRight, UsersRound } from "lucide-react"
 import { notFound, redirect } from "next/navigation"
 import { setRequestLocale } from "next-intl/server"
 import { Button } from "@/components/ui/button"
@@ -35,25 +36,34 @@ export default async function CaseDetailPage({
 
   return (
     <CaseShell caseRow={caseRow} locale={locale} currentTab="overview">
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
+      <div className="grid gap-4 md:grid-cols-[1.15fr_0.85fr]">
+        <Card className="lift-card">
           <CardHeader>
-            <CardTitle className="text-base">Próximo paso</CardTitle>
+            <CardTitle className="text-base">Proximo paso</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2">
             {canEnterWizard ? (
               <Button asChild>
-                <Link href={`/cases/${caseRow.id}/wizard`}>Continuar wizard</Link>
+                <Link href={`/cases/${caseRow.id}/wizard`}>
+                  Continuar wizard
+                  <ArrowRight className="size-4" aria-hidden />
+                </Link>
               </Button>
             ) : null}
             {caseRow.intake_status === "contract_pending" ? (
               <Button asChild>
-                <Link href={`/cases/${caseRow.id}/contract`}>Revisar y firmar contrato</Link>
+                <Link href={`/cases/${caseRow.id}/contract`}>
+                  Revisar y firmar contrato
+                  <ArrowRight className="size-4" aria-hidden />
+                </Link>
               </Button>
             ) : null}
             {caseRow.intake_status === "approved" ? (
               <Button asChild>
-                <Link href={`/cases/${caseRow.id}/review`}>Revisar PDF final</Link>
+                <Link href={`/cases/${caseRow.id}/review`}>
+                  Revisar PDF final
+                  <ArrowRight className="size-4" aria-hidden />
+                </Link>
               </Button>
             ) : null}
             {caseRow.intake_status === "finalized" ? (
@@ -62,8 +72,8 @@ export default async function CaseDetailPage({
               </Button>
             ) : null}
             {caseRow.intake_status === "review_pending" ? (
-              <p className="text-sm text-muted-foreground">
-                Tu caso está siendo revisado por nuestro equipo. Te notificaremos por correo cuando
+              <p className="text-sm leading-6 text-muted-foreground">
+                Tu caso esta siendo revisado por nuestro equipo. Te notificaremos por correo cuando
                 tengamos novedades.
               </p>
             ) : null}
@@ -71,17 +81,20 @@ export default async function CaseDetailPage({
         </Card>
 
         {minors.length > 0 ? (
-          <Card>
+          <Card className="lift-card">
             <CardHeader>
-              <CardTitle className="text-base">Beneficiarios del caso</CardTitle>
+              <CardTitle className="flex items-center gap-2 text-base">
+                <UsersRound className="size-5 text-primary" aria-hidden />
+                Beneficiarios del caso
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-1 text-sm">
+              <ul className="space-y-2 text-sm">
                 {minors.map((m) => (
-                  <li key={m.id}>
-                    <span className="font-medium">{m.full_name}</span>
+                  <li key={m.id} className="rounded-lg bg-secondary/60 px-3 py-2">
+                    <span className="font-black">{m.full_name}</span>
                     {m.date_of_birth ? (
-                      <span className="text-muted-foreground"> · {m.date_of_birth}</span>
+                      <span className="text-muted-foreground"> / {m.date_of_birth}</span>
                     ) : null}
                   </li>
                 ))}

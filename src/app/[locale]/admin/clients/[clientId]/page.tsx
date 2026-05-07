@@ -1,3 +1,4 @@
+import { UserRound } from "lucide-react"
 import { notFound } from "next/navigation"
 import { setRequestLocale } from "next-intl/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -70,12 +71,15 @@ export default async function AdminClientDetailPage({
 
   return (
     <section className="space-y-6">
-      <header>
-        <p className="text-xs uppercase tracking-wider text-muted-foreground">Cliente</p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight">
+      <header className="glass-panel rounded-lg p-5 sm:p-6">
+        <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
+          <UserRound className="size-3.5" aria-hidden />
+          Cliente
+        </p>
+        <h1 className="mt-3 text-4xl font-black leading-tight tracking-normal">
           {profile.full_name ?? profile.email}
         </h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="mt-2 text-sm font-bold text-muted-foreground">
           {profile.email} {profile.phone ? `· ${profile.phone}` : ""}
         </p>
         <p className="mt-2 text-xs text-muted-foreground">

@@ -93,7 +93,7 @@ export function DocumentsTab({
       if (minors.length === 0) {
         return (
           <section key={sectionKey} className="space-y-2">
-            <h3 className="text-base font-semibold">
+            <h3 className="text-base font-black">
               {locale === "es" ? meta.title_es : meta.title_en}
             </h3>
             <p className="text-sm text-muted-foreground">Este caso no tiene menores asociados.</p>
@@ -102,16 +102,16 @@ export function DocumentsTab({
       }
       return (
         <section key={sectionKey} className="space-y-3">
-          <h3 className="text-base font-semibold">
+          <h3 className="text-base font-black">
             {locale === "es" ? meta.title_es : meta.title_en}
           </h3>
           {minors.map((minor) => (
             <details
               key={minor.id}
               open
-              className="rounded-md border border-border bg-muted/30 p-3"
+              className="rounded-lg border border-white/70 bg-white/72 p-4 shadow-sm backdrop-blur-xl"
             >
-              <summary className="cursor-pointer text-sm font-medium">
+              <summary className="cursor-pointer text-sm font-black">
                 {minor.full_name}
                 {minor.date_of_birth ? (
                   <span className="text-muted-foreground"> · {minor.date_of_birth}</span>
@@ -140,9 +140,7 @@ export function DocumentsTab({
 
     return (
       <section key={sectionKey} className="space-y-3">
-        <h3 className="text-base font-semibold">
-          {locale === "es" ? meta.title_es : meta.title_en}
-        </h3>
+        <h3 className="text-base font-black">{locale === "es" ? meta.title_es : meta.title_en}</h3>
         <div className="grid gap-3 md:grid-cols-2">
           {types.map((dt) => {
             const docs = docsByTypeAndMinor.get(`${dt.id}:general`) ?? []
@@ -164,7 +162,7 @@ export function DocumentsTab({
   return (
     <div className="space-y-8">
       {DEFAULT_SECTIONS.map((s) => renderSection(s.key))}
-      <p className="text-xs text-muted-foreground">
+      <p className="rounded-lg border border-border/70 bg-white/60 p-3 text-xs leading-5 text-muted-foreground backdrop-blur-xl">
         Los documentos quedan privados; sólo tú y nuestro equipo pueden verlos. Cada subida y
         eliminación queda registrada en el log de auditoría.
       </p>

@@ -1,3 +1,4 @@
+import { ArrowRight, FileText } from "lucide-react"
 import { notFound, redirect } from "next/navigation"
 import { setRequestLocale } from "next-intl/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -48,9 +49,9 @@ export default async function CaseFormsPage({
               </p>
               <Link
                 href={`/cases/${caseRow.id}/forms` as never}
-                className="text-sm font-medium text-primary hover:underline"
+                className="text-sm font-black text-primary hover:underline"
               >
-                ← Volver a la lista
+                Volver a la lista
               </Link>
             </CardContent>
           </Card>
@@ -63,9 +64,9 @@ export default async function CaseFormsPage({
         <div className="mb-3">
           <Link
             href={`/cases/${caseRow.id}/forms` as never}
-            className="text-sm font-medium text-primary hover:underline"
+            className="text-sm font-black text-primary hover:underline"
           >
-            ← {locale === "es" ? "Volver a formularios" : "Back to forms"}
+            {locale === "es" ? "Volver a formularios" : "Back to forms"}
           </Link>
         </div>
         <FormRunner
@@ -84,34 +85,39 @@ export default async function CaseFormsPage({
 
   return (
     <CaseShell caseRow={caseRow} locale={locale} currentTab="forms">
-      <div className="space-y-3">
-        <p className="text-sm text-muted-foreground">
-          Estos son los formularios oficiales aplicables a tu caso. Los campos se autocompletarán
+      <div className="space-y-4">
+        <p className="rounded-lg border border-border/70 bg-white/70 p-4 text-sm leading-6 text-muted-foreground backdrop-blur-xl">
+          Estos son los formularios oficiales aplicables a tu caso. Los campos se autocompletaran
           con datos de tus documentos subidos y de tu perfil.
         </p>
         {forms.length === 0 ? (
           <Card>
             <CardContent className="py-6 text-sm text-muted-foreground">
-              No hay formularios registrados para este servicio todavía. Cuando carguemos los
-              formularios oficiales del distrito, aparecerán aquí.
+              No hay formularios registrados para este servicio todavia. Cuando carguemos los
+              formularios oficiales del distrito, apareceran aqui.
             </CardContent>
           </Card>
         ) : (
-          <div className="grid gap-3 md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2">
             {forms.map((form) => (
               <Link
                 key={form.slug}
                 href={`/cases/${caseRow.id}/forms?form=${form.slug}` as never}
-                className="block rounded-md border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-muted/40"
+                className="group lift-card block rounded-lg border border-white/70 bg-white/78 p-4 shadow-[0_16px_42px_oklch(0.2_0.047_255_/_8%)] backdrop-blur-xl"
               >
-                <h3 className="text-base font-semibold">
+                <FileText className="mb-4 size-6 text-primary" aria-hidden />
+                <h3 className="text-base font-black">
                   {locale === "es" ? form.name_es : form.name_en}
                 </h3>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  {locale === "es" ? "Versión" : "Version"} {form.version}
+                  {locale === "es" ? "Version" : "Version"} {form.version}
                 </p>
-                <p className="mt-3 text-sm font-medium text-primary">
-                  → {locale === "es" ? "Abrir formulario" : "Open form"}
+                <p className="mt-4 inline-flex items-center gap-1.5 text-sm font-black text-primary">
+                  {locale === "es" ? "Abrir formulario" : "Open form"}
+                  <ArrowRight
+                    className="size-4 transition group-hover:translate-x-0.5"
+                    aria-hidden
+                  />
                 </p>
               </Link>
             ))}

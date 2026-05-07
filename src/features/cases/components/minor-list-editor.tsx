@@ -41,9 +41,9 @@ export function MinorListEditor({ minors, onChange, beneficiaryLabel }: MinorLis
         <div
           // biome-ignore lint/suspicious/noArrayIndexKey: order is fixed by tier selection; minors[i] is positional
           key={`minor-${i}`}
-          className="rounded-md border border-border bg-muted/40 p-3"
+          className="rounded-lg border border-white/70 bg-white/72 p-4 shadow-sm backdrop-blur-xl"
         >
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          <p className="text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
             {beneficiaryLabel} {i + 1}
           </p>
           <div className="mt-2 grid gap-3 md:grid-cols-2">

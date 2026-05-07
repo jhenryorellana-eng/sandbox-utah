@@ -1,3 +1,4 @@
+import { FileSearch } from "lucide-react"
 import { setRequestLocale } from "next-intl/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { fetchComplianceMetrics } from "@/features/complaints/repository"
@@ -28,9 +29,15 @@ export default async function AdminCompliancePage({
 
   return (
     <section className="space-y-6">
-      <header>
-        <h1 className="text-3xl font-semibold tracking-tight">Compliance — Sandbox</h1>
-        <p className="text-sm text-muted-foreground">
+      <header className="glass-panel rounded-lg p-5 sm:p-6">
+        <p className="brand-kicker">
+          <FileSearch className="size-3.5" aria-hidden />
+          Utah Sandbox
+        </p>
+        <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">
+          Compliance — Sandbox
+        </h1>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
           Métricas del mes en curso. El reporte oficial al Innovation Office se prepara mensualmente
           con CSV/PDF.
         </p>
@@ -108,7 +115,7 @@ function Kpi({ label, value, subline }: { label: string; value: string; subline?
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-2xl font-semibold tabular-nums">{value}</p>
+        <p className="text-2xl font-black tabular-nums">{value}</p>
         {subline && <p className="mt-1 text-xs text-muted-foreground">{subline}</p>}
       </CardContent>
     </Card>

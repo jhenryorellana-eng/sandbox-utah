@@ -1,4 +1,14 @@
+import {
+  BadgeDollarSign,
+  BookOpen,
+  FileSearch,
+  Gauge,
+  MessageSquareWarning,
+  ShieldCheck,
+} from "lucide-react"
 import { useTranslations } from "next-intl"
+import type { ComponentType, ReactNode } from "react"
+import { BrandMark } from "@/components/layout/brand-mark"
 import { Link } from "@/lib/i18n/navigation"
 import type { Locale } from "@/lib/i18n/routing"
 
@@ -11,28 +21,23 @@ interface NavItem {
     | "catalog"
     | "complaints"
     | "compliance"
+  icon: ComponentType<{ className?: string }>
 }
 
 const NAV: NavItem[] = [
-  { href: "/admin", labelKey: "dashboard" },
-  { href: "/admin/identity-verifications", labelKey: "identityVerifications" },
-  { href: "/admin/payments", labelKey: "payments" },
-  { href: "/admin/catalog", labelKey: "catalog" },
-  { href: "/admin/complaints", labelKey: "complaints" },
-  { href: "/admin/compliance", labelKey: "compliance" },
+  { href: "/admin", labelKey: "dashboard", icon: Gauge },
+  { href: "/admin/identity-verifications", labelKey: "identityVerifications", icon: ShieldCheck },
+  { href: "/admin/payments", labelKey: "payments", icon: BadgeDollarSign },
+  { href: "/admin/catalog", labelKey: "catalog", icon: BookOpen },
+  { href: "/admin/complaints", labelKey: "complaints", icon: MessageSquareWarning },
+  { href: "/admin/compliance", labelKey: "compliance", icon: FileSearch },
 ]
 
-export function AdminShell({
-  children,
-  locale: _locale,
-}: {
-  children: React.ReactNode
-  locale: Locale
-}) {
+export function AdminShell({ children, locale: _locale }: { children: ReactNode; locale: Locale }) {
   return (
-    <div className="mx-auto flex w-full max-w-screen-xl flex-1 gap-6 px-4 py-8">
+    <div className="page-shell grid w-full flex-1 gap-6 lg:grid-cols-[17rem_1fr]">
       <Sidebar />
-      <main className="flex-1">{children}</main>
+      <main className="min-w-0">{children}</main>
     </div>
   )
 }
@@ -40,21 +45,33 @@ export function AdminShell({
 function Sidebar() {
   const t = useTranslations("Admin.nav")
   return (
-    <aside className="hidden w-56 shrink-0 lg:block">
-      <nav aria-label="Admin">
-        <ul className="space-y-1">
-          {NAV.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className="block rounded-md px-3 py-2 text-sm font-medium text-foreground transition hover:bg-secondary"
-              >
-                {t(item.labelKey)}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+    <aside className="lg:sticky lg:top-28 lg:self-start">
+      <div className="glass-panel rounded-lg p-4">
+        <div className="hidden pb-4 lg:block">
+          <BrandMark />
+          <p className="mt-4 text-xs font-bold leading-5 text-muted-foreground">
+            Console interna para pagos, identidad, catalogo y compliance del sandbox.
+          </p>
+        </div>
+        <nav aria-label="Admin">
+          <ul className="flex gap-2 overflow-x-auto lg:flex-col lg:gap-1">
+            {NAV.map((item) => {
+              const Icon = item.icon
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="inline-flex min-w-max items-center gap-2 rounded-lg px-3 py-2 text-sm font-black text-muted-foreground transition hover:bg-white/80 hover:text-primary lg:w-full"
+                  >
+                    <Icon className="size-4" aria-hidden />
+                    {t(item.labelKey)}
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
+      </div>
     </aside>
   )
 }

@@ -1,6 +1,8 @@
+import { CreditCard } from "lucide-react"
 import { notFound, redirect } from "next/navigation"
 import { setRequestLocale } from "next-intl/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { CaseShell } from "@/features/cases/components/case-shell"
 import { fetchCaseById } from "@/features/cases/repository"
 import { ReportPaymentForm } from "@/features/payments/components/report-payment-form"
 import { fetchPaymentsForCase, fetchPlanForCase } from "@/features/payments/repository"
@@ -41,45 +43,44 @@ export default async function CasePaymentsPage({
     plan?.installments.filter((i) => i.status === "pending" || i.status === "overdue") ?? []
 
   return (
-    <section className="mx-auto w-full max-w-3xl flex-1 px-4 py-10">
-      <p className="text-xs uppercase tracking-wider text-muted-foreground">
-        {caseRow.case_number}
-      </p>
-      <h1 className="mt-1 text-3xl font-semibold tracking-tight">Mis pagos</h1>
-      <p className="text-muted-foreground">{caseRow.display_name}</p>
-
+    <CaseShell caseRow={caseRow} locale={locale} currentTab="payments">
       {!plan && (
-        <Card className="mt-6">
+        <Card className="lift-card">
           <CardContent className="py-6 text-sm text-muted-foreground">
-            Aún no se ha definido un plan de pagos. Tu admin lo creará cuando avance el caso.
+            Aun no se ha definido un plan de pagos. Tu admin lo creara cuando avance el caso.
           </CardContent>
         </Card>
       )}
 
       {plan && (
-        <>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+        <div className="space-y-6">
+          <div className="grid gap-4 sm:grid-cols-3">
             <Kpi label="Total" value={Money.fromCents(totalDue).format(locale)} />
             <Kpi label="Pagado" value={Money.fromCents(totalPaid).format(locale)} />
             <Kpi label="Saldo" value={Money.fromCents(balance).format(locale)} />
           </div>
 
-          <Card className="mt-6">
+          <Card className="lift-card">
             <CardHeader>
-              <CardTitle className="text-base">Cronograma</CardTitle>
+              <CardTitle className="flex items-center gap-2 text-base">
+                <CreditCard className="size-5 text-primary" aria-hidden />
+                Cronograma
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="divide-y divide-border">
+              <ul className="divide-y divide-border/70">
                 {plan.installments.map((i) => (
-                  <li key={i.id} className="flex items-center justify-between py-2 text-sm">
+                  <li key={i.id} className="flex items-center justify-between gap-3 py-3 text-sm">
                     <span>
-                      <span className="font-medium">
+                      <span className="font-black">
                         {i.installment_number === 0 ? "Enganche" : `Cuota ${i.installment_number}`}
                       </span>{" "}
-                      <span className="text-muted-foreground">· {i.due_date}</span>
+                      <span className="text-muted-foreground">/ {i.due_date}</span>
                     </span>
                     <span className="flex items-center gap-3">
-                      <span>{Money.fromCents(i.amount_cents).format(locale)}</span>
+                      <span className="font-black">
+                        {Money.fromCents(i.amount_cents).format(locale)}
+                      </span>
                       <StatusBadge status={i.status} />
                     </span>
                   </li>
@@ -88,11 +89,11 @@ export default async function CasePaymentsPage({
             </CardContent>
           </Card>
 
-          <Card className="mt-6">
+          <Card className="lift-card">
             <CardHeader>
               <CardTitle className="text-base">Reportar nuevo pago</CardTitle>
               <CardDescription>
-                Métodos aceptados: efectivo, Zelle, transferencia, cheque, money order, Cash App,
+                Metodos aceptados: efectivo, Zelle, transferencia, cheque, money order, Cash App,
                 Venmo. Sube siempre el comprobante.
               </CardDescription>
             </CardHeader>
@@ -108,19 +109,21 @@ export default async function CasePaymentsPage({
           </Card>
 
           {payments.length > 0 && (
-            <Card className="mt-6">
+            <Card className="lift-card">
               <CardHeader>
                 <CardTitle className="text-base">Pagos reportados</CardTitle>
               </CardHeader>
               <CardContent>
-                <ul className="divide-y divide-border">
+                <ul className="divide-y divide-border/70">
                   {payments.map((p) => (
-                    <li key={p.id} className="flex items-center justify-between py-2 text-sm">
+                    <li key={p.id} className="flex items-center justify-between gap-3 py-3 text-sm">
                       <span>
-                        {p.payment_date} · {p.payment_method}
+                        {p.payment_date} / {p.payment_method}
                       </span>
                       <span className="flex items-center gap-3">
-                        <span>{Money.fromCents(p.amount_cents).format(locale)}</span>
+                        <span className="font-black">
+                          {Money.fromCents(p.amount_cents).format(locale)}
+                        </span>
                         <StatusBadge status={p.status} />
                       </span>
                     </li>
@@ -129,22 +132,22 @@ export default async function CasePaymentsPage({
               </CardContent>
             </Card>
           )}
-        </>
+        </div>
       )}
-    </section>
+    </CaseShell>
   )
 }
 
 function Kpi({ label, value }: { label: string; value: string }) {
   return (
-    <Card>
+    <Card className="lift-card">
       <CardHeader>
-        <CardTitle className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        <CardTitle className="text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
           {label}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-2xl font-semibold tabular-nums">{value}</p>
+        <p className="text-2xl font-black tabular-nums">{value}</p>
       </CardContent>
     </Card>
   )
@@ -161,7 +164,9 @@ function StatusBadge({ status }: { status: string }) {
     waived: "bg-zinc-100 text-zinc-900",
   }
   return (
-    <span className={`rounded-full px-2 py-0.5 text-xs ${palette[status] ?? "bg-secondary"}`}>
+    <span
+      className={`rounded-full px-2.5 py-1 text-xs font-black ${palette[status] ?? "bg-secondary"}`}
+    >
       {status}
     </span>
   )

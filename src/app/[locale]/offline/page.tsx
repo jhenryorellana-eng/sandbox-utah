@@ -16,7 +16,7 @@ function OfflineContent() {
         <span aria-hidden className="text-5xl">
           📡
         </span>
-        <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
+        <h1 className="text-2xl font-semibold tracking-normal">{t("title")}</h1>
         <p className="text-muted-foreground">{t("body")}</p>
         <a
           href="/"

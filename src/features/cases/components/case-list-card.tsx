@@ -1,3 +1,4 @@
+import { ArrowRight, FileText } from "lucide-react"
 import { Link } from "@/lib/i18n/navigation"
 import { Money } from "@/shared/domain/money"
 import type { CaseWithService } from "../repository"
@@ -6,12 +7,12 @@ const STATUS_LABELS: Record<string, { es: string; en: string }> = {
   created: { es: "Creado", en: "Created" },
   contract_pending: { es: "Contrato pendiente de firma", en: "Contract pending signature" },
   contract_signed: {
-    es: "Contrato firmado · esperando pago",
-    en: "Contract signed · awaiting payment",
+    es: "Contrato firmado, esperando pago",
+    en: "Contract signed, awaiting payment",
   },
   payment_pending: { es: "Pago pendiente", en: "Payment pending" },
   in_progress: { es: "En progreso", en: "In progress" },
-  review_pending: { es: "En revisión QA", en: "Under QA review" },
+  review_pending: { es: "En revision QA", en: "Under QA review" },
   needs_correction: { es: "Necesita correcciones", en: "Needs corrections" },
   approved: { es: "Aprobado", en: "Approved" },
   finalized: { es: "Finalizado", en: "Finalized" },
@@ -31,8 +32,8 @@ const NEXT_ACTION: Record<string, { es: string; en: string; href: (id: string) =
     href: (id) => `/cases/${id}/contract`,
   },
   contract_signed: {
-    es: "Esperando que admin cree plan de pagos",
-    en: "Waiting for admin to create payment plan",
+    es: "Esperando plan de pagos",
+    en: "Waiting for payment plan",
     href: (id) => `/cases/${id}/payments`,
   },
   payment_pending: {
@@ -51,8 +52,8 @@ const NEXT_ACTION: Record<string, { es: string; en: string; href: (id: string) =
     href: (id) => `/cases/${id}`,
   },
   review_pending: {
-    es: "En revisión por nuestro equipo",
-    en: "Under review by our team",
+    es: "En revision por el equipo",
+    en: "Under team review",
     href: (id) => `/cases/${id}`,
   },
   approved: {
@@ -84,37 +85,53 @@ export function CaseListCard({ caseRow, locale }: CaseListCardProps) {
   const beneficiaryHint =
     caseRow.beneficiary_count && caseRow.beneficiary_count > 0
       ? locale === "es"
-        ? `${caseRow.beneficiary_count} ${caseRow.beneficiary_count === 1 ? "beneficiario" : "beneficiarios"}`
-        : `${caseRow.beneficiary_count} ${caseRow.beneficiary_count === 1 ? "beneficiary" : "beneficiaries"}`
+        ? `${caseRow.beneficiary_count} ${
+            caseRow.beneficiary_count === 1 ? "beneficiario" : "beneficiarios"
+          }`
+        : `${caseRow.beneficiary_count} ${
+            caseRow.beneficiary_count === 1 ? "beneficiary" : "beneficiaries"
+          }`
       : null
 
   return (
     <Link
       href={`/cases/${caseRow.id}` as never}
-      className="block rounded-md border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-muted/40"
+      className="group lift-card block rounded-lg border border-white/70 bg-white/78 p-4 shadow-[0_16px_42px_oklch(0.2_0.047_255_/_8%)] backdrop-blur-xl"
     >
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">
-            {caseRow.case_number}
-          </p>
-          <h3 className="mt-0.5 text-base font-semibold">{caseRow.display_name}</h3>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {serviceName}
-            {tierLabel ? ` · ${tierLabel}` : ""}
-            {beneficiaryHint ? ` · ${beneficiaryHint}` : ""}
-          </p>
-        </div>
-        <div className="text-right">
-          <p className="text-base font-bold">
-            {caseRow.agreed_price_cents
-              ? Money.fromCents(caseRow.agreed_price_cents).format(locale)
-              : "—"}
-          </p>
-          <p className="text-xs text-muted-foreground">{statusLabel}</p>
-        </div>
+      <div className="flex items-start justify-between gap-3">
+        <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
+          <FileText className="size-5" aria-hidden />
+        </span>
+        <span className="rounded-full bg-secondary px-2.5 py-1 text-xs font-black text-secondary-foreground">
+          {statusLabel}
+        </span>
       </div>
-      {next ? <p className="mt-3 text-sm font-medium text-primary">→ {next[locale]}</p> : null}
+
+      <p className="mt-4 text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
+        {caseRow.case_number}
+      </p>
+      <h3 className="mt-1 text-lg font-black leading-tight tracking-normal text-foreground">
+        {caseRow.display_name}
+      </h3>
+      <p className="mt-2 text-sm leading-6 text-muted-foreground">
+        {serviceName}
+        {tierLabel ? ` / ${tierLabel}` : ""}
+        {beneficiaryHint ? ` / ${beneficiaryHint}` : ""}
+      </p>
+
+      <div className="mt-4 flex items-center justify-between border-t border-border/70 pt-4">
+        <p className="text-lg font-black text-primary">
+          {caseRow.agreed_price_cents
+            ? Money.fromCents(caseRow.agreed_price_cents).format(locale)
+            : "-"}
+        </p>
+        {next ? (
+          <span className="inline-flex items-center gap-1.5 text-sm font-black text-primary">
+            {next[locale]}
+            <ArrowRight className="size-4 transition group-hover:translate-x-0.5" aria-hidden />
+          </span>
+        ) : null}
+      </div>
     </Link>
   )
 }

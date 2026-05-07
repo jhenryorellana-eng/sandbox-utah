@@ -80,12 +80,14 @@ export function FormRunner({
       }}
       className="space-y-6"
     >
-      <header className="flex flex-wrap items-center justify-between gap-2">
+      <header className="glass-panel flex flex-wrap items-center justify-between gap-3 rounded-lg p-4">
         <div>
-          <h2 className="text-xl font-semibold">{formName}</h2>
-          <p className="text-xs text-muted-foreground">Estado: {labelForStatus(status, locale)}</p>
+          <h2 className="text-xl font-black tracking-normal">{formName}</h2>
+          <p className="text-xs font-bold text-muted-foreground">
+            Estado: {labelForStatus(status, locale)}
+          </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button type="button" variant="outline" disabled={pending} onClick={() => save(false)}>
             {pending ? "..." : locale === "es" ? "Guardar borrador" : "Save draft"}
           </Button>
@@ -135,7 +137,7 @@ export function FormRunner({
 
       {groups.map((group) => (
         <section key={group.title_es} className="space-y-3">
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          <h3 className="text-sm font-black uppercase tracking-[0.12em] text-muted-foreground">
             {locale === "es" ? group.title_es : group.title_en}
           </h3>
           <div className="grid gap-3 md:grid-cols-2">
@@ -189,7 +191,7 @@ function FieldEditor({
           required={field.required}
           rows={3}
           className={
-            "mt-1 flex min-h-[5rem] w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring " +
+            "mt-1 flex min-h-[5rem] w-full rounded-lg border border-input bg-white/76 px-3.5 py-2 text-sm font-semibold shadow-sm outline-none backdrop-blur-xl transition-all focus-visible:border-primary/45 focus-visible:bg-white/95 focus-visible:ring-2 focus-visible:ring-ring/35 " +
             (isAutofilled ? "border-primary/40 bg-primary/5" : "")
           }
         />
@@ -205,7 +207,7 @@ function FieldEditor({
       <div className="mt-1 flex flex-wrap items-center gap-2">
         {isAutofilled ? (
           <span
-            className="inline-flex items-center gap-1 text-xs text-primary"
+            className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-1 text-xs font-black text-primary"
             title={`Origen: ${source?.from}`}
           >
             <span aria-hidden>✨</span>

@@ -47,10 +47,10 @@ export function OnboardingWizard({
   }
 
   return (
-    <Card className="w-full max-w-2xl">
+    <Card className="w-full max-w-2xl animate-in-up">
       <CardContent className="space-y-6 p-6 sm:p-8">
         <header className="space-y-2">
-          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          <p className="text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
             {t("stepOf", { step: idx + 1, total: ONBOARDING_STEPS.length })}
           </p>
           <ProgressBar current={idx + 1} total={ONBOARDING_STEPS.length} />
@@ -98,9 +98,9 @@ function ProgressBar({ current, total }: { current: number; total: number }) {
       aria-valuemin={0}
       aria-valuemax={100}
       aria-label="Onboarding progress"
-      className="h-1.5 w-full overflow-hidden rounded-full bg-secondary"
+      className="h-2 w-full overflow-hidden rounded-full bg-secondary shadow-inner"
     >
-      <div className="h-full bg-primary transition-all" style={{ width: `${pct}%` }} />
+      <div className="h-full bg-primary transition-all duration-500" style={{ width: `${pct}%` }} />
     </div>
   )
 }

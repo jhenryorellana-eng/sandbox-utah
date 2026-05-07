@@ -19,7 +19,7 @@ export interface CategoryWithServicesAndTiers extends ServiceCategoryRow {
 }
 
 export async function fetchActiveCatalog(): Promise<CategoryWithServices[]> {
-  const supabase = await createServerClient()
+  const supabase = createServiceClient()
   const { data: categories, error: catErr } = await supabase
     .from("service_categories")
     .select("*")
@@ -42,7 +42,7 @@ export async function fetchActiveCatalog(): Promise<CategoryWithServices[]> {
 }
 
 export async function fetchActiveCatalogWithTiers(): Promise<CategoryWithServicesAndTiers[]> {
-  const supabase = await createServerClient()
+  const supabase = createServiceClient()
   const [{ data: categories }, { data: services }, { data: tiers }] = await Promise.all([
     supabase
       .from("service_categories")
@@ -83,7 +83,7 @@ export async function fetchServiceBySlug(slug: string): Promise<{
   category: ServiceCategoryRow
   tiers: ServiceTierRow[]
 } | null> {
-  const supabase = await createServerClient()
+  const supabase = createServiceClient()
   const { data: service, error } = await supabase
     .from("services")
     .select("*")
@@ -94,7 +94,12 @@ export async function fetchServiceBySlug(slug: string): Promise<{
   if (!service) return null
 
   const [{ data: category, error: catErr }, { data: tiers }] = await Promise.all([
-    supabase.from("service_categories").select("*").eq("id", service.category_id).maybeSingle(),
+    supabase
+      .from("service_categories")
+      .select("*")
+      .eq("id", service.category_id)
+      .eq("is_active", true)
+      .maybeSingle(),
     supabase
       .from("service_tiers")
       .select("*")

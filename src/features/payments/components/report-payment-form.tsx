@@ -63,7 +63,7 @@ export function ReportPaymentForm({ installments }: { installments: InstallmentO
           id="installment"
           value={installmentId}
           onChange={(e) => setInstallmentId(e.target.value)}
-          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+          className="flex h-11 w-full rounded-lg border border-input bg-white/76 px-3.5 py-2 text-sm font-semibold shadow-sm backdrop-blur-xl"
         >
           {installments.map((i) => (
             <option key={i.id} value={i.id}>
@@ -80,7 +80,7 @@ export function ReportPaymentForm({ installments }: { installments: InstallmentO
           id="paymentMethod"
           name="paymentMethod"
           required
-          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+          className="flex h-11 w-full rounded-lg border border-input bg-white/76 px-3.5 py-2 text-sm font-semibold shadow-sm backdrop-blur-xl"
         >
           {METHODS.map((m) => (
             <option key={m.value} value={m.value}>
@@ -133,7 +133,7 @@ export function ReportPaymentForm({ installments }: { installments: InstallmentO
           type="file"
           accept="image/jpeg,image/png,image/webp,application/pdf"
           required
-          className="block w-full text-sm file:mr-3 file:rounded-md file:border-0 file:bg-secondary file:px-3 file:py-2 file:text-sm file:font-medium"
+          className="block w-full text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-secondary file:px-3 file:py-2 file:text-sm file:font-black"
         />
         <p className="text-xs text-muted-foreground">
           Captura de Zelle, foto del cheque, recibo de efectivo, etc. Obligatorio.

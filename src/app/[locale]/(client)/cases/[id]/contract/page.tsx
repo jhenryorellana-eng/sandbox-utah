@@ -1,3 +1,4 @@
+import { FileSignature } from "lucide-react"
 import type { Route } from "next"
 import { notFound, redirect } from "next/navigation"
 import { setRequestLocale } from "next-intl/server"
@@ -41,14 +42,17 @@ export default async function CaseContractPage({
   }
 
   return (
-    <section className="mx-auto w-full max-w-2xl flex-1 px-4 py-10">
-      <p className="text-xs uppercase tracking-wider text-muted-foreground">
+    <section className="page-shell max-w-3xl flex-1">
+      <p className="brand-kicker">
+        <FileSignature className="size-3.5" aria-hidden />
         Contrato {contract.contract_number}
       </p>
-      <h1 className="mt-1 text-3xl font-semibold tracking-tight">{caseRow.display_name}</h1>
+      <h1 className="mt-5 text-balance text-4xl font-black leading-tight tracking-normal">
+        {caseRow.display_name}
+      </h1>
 
       <div className="mt-6 space-y-4">
-        <Card>
+        <Card className="lift-card">
           <CardHeader>
             <CardTitle className="text-base">Términos del servicio</CardTitle>
           </CardHeader>
@@ -76,7 +80,7 @@ export default async function CaseContractPage({
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="lift-card">
           <CardHeader>
             <CardTitle className="text-base">Disclaimer obligatorio</CardTitle>
           </CardHeader>

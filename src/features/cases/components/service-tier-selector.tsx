@@ -1,5 +1,6 @@
 "use client"
 
+import { CheckCircle2 } from "lucide-react"
 import { Money } from "@/shared/domain/money"
 
 export interface SelectableTier {
@@ -27,14 +28,14 @@ export function ServiceTierSelector({
 }: ServiceTierSelectorProps) {
   if (tiers.length === 0) {
     return (
-      <p className="rounded-md border border-dashed border-border bg-muted/40 p-3 text-sm text-muted-foreground">
+      <p className="rounded-lg border border-dashed border-border bg-white/70 p-4 text-sm text-muted-foreground">
         Este servicio aún no tiene planes activos. Vuelve más tarde o contacta soporte.
       </p>
     )
   }
 
   return (
-    <div className="grid gap-2 sm:grid-cols-2">
+    <div className="grid gap-3 sm:grid-cols-2">
       {tiers
         .slice()
         .sort((a, b) => a.beneficiaries_count - b.beneficiaries_count)
@@ -49,18 +50,21 @@ export function ServiceTierSelector({
               onClick={() => onSelect(tier.id)}
               aria-pressed={selected}
               className={
-                "flex flex-col items-start gap-1 rounded-md border p-3 text-left transition-colors " +
+                "lift-card relative flex flex-col items-start gap-1 rounded-lg border p-4 text-left shadow-sm backdrop-blur-xl " +
                 (selected
-                  ? "border-primary bg-primary/5 ring-2 ring-primary/30"
-                  : "border-border hover:border-primary/40 hover:bg-muted/40")
+                  ? "border-primary bg-primary/10 ring-2 ring-primary/20"
+                  : "border-white/70 bg-white/74 hover:border-primary/30 hover:bg-white/90")
               }
             >
-              <span className="text-base font-semibold">{label}</span>
-              <span className="text-xl font-bold text-primary">
+              {selected ? (
+                <CheckCircle2 className="absolute top-3 right-3 size-5 text-primary" aria-hidden />
+              ) : null}
+              <span className="pr-7 text-base font-black">{label}</span>
+              <span className="text-2xl font-black text-primary">
                 {Money.fromCents(tier.price_cents).format(locale)}
               </span>
               {description ? (
-                <span className="text-xs text-muted-foreground">{description}</span>
+                <span className="text-xs leading-5 text-muted-foreground">{description}</span>
               ) : null}
             </button>
           )

@@ -30,7 +30,7 @@ export function PersonalInfoStep({ onSuccess }: { onSuccess: () => void }) {
   return (
     <form action={onSubmit} className="flex flex-col gap-4">
       <header>
-        <h2 className="text-2xl font-semibold tracking-tight">{t("title")}</h2>
+        <h2 className="text-2xl font-semibold tracking-normal">{t("title")}</h2>
         <p className="mt-1 text-muted-foreground">{t("subtitle")}</p>
       </header>
 

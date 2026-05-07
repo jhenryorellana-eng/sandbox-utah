@@ -1,3 +1,4 @@
+import { BadgeCheck, FileText } from "lucide-react"
 import { Money } from "@/shared/domain/money"
 import type { CaseWithService } from "../repository"
 import { type CaseTabKey, CaseTabsNav } from "./case-tabs-nav"
@@ -8,7 +9,7 @@ const STATUS_LABELS: Record<string, { es: string; en: string }> = {
   contract_signed: { es: "Contrato firmado", en: "Contract signed" },
   payment_pending: { es: "Pago pendiente", en: "Payment pending" },
   in_progress: { es: "En progreso", en: "In progress" },
-  review_pending: { es: "En revisión", en: "Under review" },
+  review_pending: { es: "En revision", en: "Under review" },
   needs_correction: { es: "Necesita correcciones", en: "Needs correction" },
   approved: { es: "Aprobado", en: "Approved" },
   finalized: { es: "Finalizado", en: "Finalized" },
@@ -21,7 +22,7 @@ const STATUS_TONE: Record<string, string> = {
   contract_pending: "bg-amber-100 text-amber-900",
   contract_signed: "bg-blue-100 text-blue-900",
   payment_pending: "bg-amber-100 text-amber-900",
-  in_progress: "bg-blue-100 text-blue-900",
+  in_progress: "bg-primary/10 text-primary",
   review_pending: "bg-violet-100 text-violet-900",
   needs_correction: "bg-rose-100 text-rose-900",
   approved: "bg-emerald-100 text-emerald-900",
@@ -49,29 +50,34 @@ export function CaseShell({ caseRow, locale, currentTab, children }: CaseShellPr
   const statusTone = STATUS_TONE[statusKey] ?? "bg-muted"
 
   return (
-    <section className="mx-auto w-full max-w-4xl flex-1 px-4 py-8">
-      <header className="mb-4 space-y-1">
-        <p className="text-xs uppercase tracking-wider text-muted-foreground">
-          {caseRow.case_number}
-        </p>
-        <h1 className="text-3xl font-semibold tracking-tight">{caseRow.display_name}</h1>
-        <p className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-          <span>{serviceName}</span>
-          {tierLabel ? <span aria-hidden>·</span> : null}
-          {tierLabel ? <span>{tierLabel}</span> : null}
-          <span aria-hidden>·</span>
-          <span>
-            {caseRow.agreed_price_cents
-              ? Money.fromCents(caseRow.agreed_price_cents).format(locale)
-              : "—"}
-          </span>
-          <span aria-hidden>·</span>
+    <section className="page-shell max-w-5xl flex-1">
+      <header className="glass-panel mb-4 rounded-lg p-5 sm:p-6">
+        <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+          <div className="min-w-0">
+            <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-muted-foreground">
+              <FileText className="size-3.5" aria-hidden />
+              {caseRow.case_number}
+            </p>
+            <h1 className="mt-3 text-balance text-3xl font-black leading-tight tracking-normal sm:text-4xl">
+              {caseRow.display_name}
+            </h1>
+            <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-bold text-muted-foreground">
+              <span>{serviceName}</span>
+              {tierLabel ? <span>{tierLabel}</span> : null}
+              <span>
+                {caseRow.agreed_price_cents
+                  ? Money.fromCents(caseRow.agreed_price_cents).format(locale)
+                  : "-"}
+              </span>
+            </p>
+          </div>
           <span
-            className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusTone}`}
+            className={`inline-flex w-fit items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-black ${statusTone}`}
           >
+            <BadgeCheck className="size-3.5" aria-hidden />
             {statusLabel}
           </span>
-        </p>
+        </div>
       </header>
       <CaseTabsNav caseId={caseRow.id} current={currentTab} locale={locale} />
       <div className="pt-6">{children}</div>

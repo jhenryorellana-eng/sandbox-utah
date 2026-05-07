@@ -37,24 +37,24 @@ export function FileRow({ doc, onDeleted, readOnly }: FileRowProps) {
   const extractionLabel = labelForExtraction(doc.extraction_status)
 
   return (
-    <div className="flex flex-wrap items-center gap-3 rounded-md border border-border bg-card p-2.5 text-sm">
+    <div className="flex flex-wrap items-center gap-3 rounded-lg border border-border/70 bg-white/70 p-3 text-sm shadow-sm backdrop-blur-xl">
       <a
         href={`/api/documents/${doc.id}/signed-url`}
         target="_blank"
         rel="noopener noreferrer"
-        className="min-w-0 flex-1 truncate font-medium text-primary hover:underline"
+        className="min-w-0 flex-1 truncate font-black text-primary hover:underline"
       >
         {doc.filename}
       </a>
       <span className="text-xs text-muted-foreground">{sizeLabel}</span>
       <span
-        className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs ${toneForStatus(doc.status)}`}
+        className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-black ${toneForStatus(doc.status)}`}
       >
         {labelForStatus(doc.status)}
       </span>
       {extractionLabel ? (
         <span
-          className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs ${toneForExtraction(doc.extraction_status)}`}
+          className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-black ${toneForExtraction(doc.extraction_status)}`}
         >
           {extractionLabel}
         </span>

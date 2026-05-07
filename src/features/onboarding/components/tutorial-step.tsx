@@ -11,7 +11,7 @@ export function TutorialStep({ onSuccess }: { onSuccess: () => void }) {
   return (
     <div className="flex flex-col gap-4">
       <header>
-        <h2 className="text-2xl font-semibold tracking-tight">{t("title")}</h2>
+        <h2 className="text-2xl font-semibold tracking-normal">{t("title")}</h2>
       </header>
       <ol className="space-y-3">
         {steps.map((key, idx) => (

@@ -126,14 +126,14 @@ export default async function CaseFilingPage({
   }
 
   return (
-    <section className="mx-auto w-full max-w-3xl flex-1 px-4 py-10">
-      <p className="text-xs uppercase tracking-wider text-muted-foreground">
+    <section className="page-shell max-w-4xl flex-1">
+      <p className="brand-kicker">
         <Link href={`/cases/${id}`} className="hover:underline">
           ← {caseRow.case_number}
         </Link>
       </p>
-      <h1 className="mt-1 text-3xl font-semibold tracking-tight">{t("tabTitle")}</h1>
-      <p className="mt-1 text-muted-foreground">{t("tabSubtitle")}</p>
+      <h1 className="mt-5 text-4xl font-black leading-tight tracking-normal">{t("tabTitle")}</h1>
+      <p className="mt-2 max-w-2xl text-muted-foreground">{t("tabSubtitle")}</p>
 
       <div className="mt-6">
         <FilingTab caseId={id} locale={locale} state={viewState} />
